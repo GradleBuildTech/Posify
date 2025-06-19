@@ -21,3 +21,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "PosNativeApp"
 include(":app")
+include(":client")
+include(":core")
+include(":navigation")
+include(":feat:auth")
+include(":previewData")
+include(":components")
+include(":test:clientTest")
+include(":test:uiTest")
+include(":data")
