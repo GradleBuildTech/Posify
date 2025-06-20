@@ -11,4 +11,11 @@ object Versions {
     const val composeBom = "2024.09.00"
     const val appcompat = "1.7.1"
     const val material = "1.12.0"
+    const val retrofit = "2.10.0"
+    const val moshi = "1.14.0"
+    const val navigation = "2.7.0"
+    const val hilt = "2.47"
+
+    const val ksp = "1.9.21-1.0.16"
+    const val daggerHilt = "2.47"
 }

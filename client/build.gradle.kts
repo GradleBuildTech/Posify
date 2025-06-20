@@ -1,17 +1,23 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id(BuildPlugins.kspId)
+    id(BuildPlugins.daggerHiltPlugin)
 }
 
+val configProperties = BuildConfig.projectConfigurations(project)
+
 android {
-    namespace = "com.example.client"
-    compileSdk = 35
+    namespace = Android.applicationId
+    compileSdk = Android.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Android.minSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+
+        configProperties.forEach { key, value ->
+            buildConfigField("String", key.toString(), "\"${value}\"")
+        }
     }
 
     buildTypes {
@@ -27,6 +33,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     kotlinOptions {
         jvmTarget = "11"
     }
@@ -34,10 +45,30 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // 🧱 Core AndroidX & Lifecycle
+    implementation(Dependencies.androidxCoreKtx)
+    implementation(Dependencies.androidxAppCompat)
+
+    // 📦 Jetpack Compose UI
+    implementation(Dependencies.material)
+
+    // 🧪 Instrumented Testing (UI test, Espresso, etc.)
+    testImplementation(Dependencies.junit)
+    androidTestImplementation(Dependencies.androidxJunit)
+    androidTestImplementation(Dependencies.espressoCore)
+
+
+    // 🛜 Networking
+    implementation(Dependencies.retrofitCore)
+    implementation(Dependencies.retrofitMoshiConverter)
+    implementation(Dependencies.retrofitGsonConverter)
+
+    // 🙈 Adaptors
+    implementation(Dependencies.moshiKotlin)
+    implementation(Dependencies.moshi)
+    implementation(Dependencies.moshiAdapters)
+
+    // 🎉 Hilt
+    ksp(Dependencies.hiltCompiler)
+    implementation(Dependencies.hiltCore)
 }

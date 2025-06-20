@@ -11,6 +11,9 @@ object BuildPlugins {
 
     // Reuse plugin for library modules
     val androidLibrary = "com.android.tools.build:gradle:${Versions.agp}"
+
+    val kspId ="com.google.devtools.ksp"
+    val daggerHiltPlugin = "com.google.dagger.hilt.android"
 }
 
 // ✅ Android app configuration constants (used in app module's build.gradle.kts)
@@ -50,4 +53,24 @@ object Dependencies {
     val junit = "junit:junit:${Versions.junit}"
     val androidxJunit = "androidx.test.ext:junit:${Versions.junitVersion}"
     val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+
+
+    //Networking
+    val retrofitCore = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+
+    // Navigation
+    val composeNavigation = "androidx.navigation:navigation-compose:${Versions.navigation}"
+
+    //Adapter
+    val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+    val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
+    val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+
+    // Hilt
+    val hiltCore = "com.google.dagger:hilt-android:${Versions.hilt}"
+    val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+
 }

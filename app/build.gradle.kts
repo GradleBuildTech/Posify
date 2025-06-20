@@ -1,5 +1,3 @@
-import com.android.tools.r8.internal.ke
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -96,4 +94,6 @@ dependencies {
     debugImplementation(Dependencies.composeUiTooling)
     debugImplementation(Dependencies.composeUiTestManifest)
 
+    // 🎉 Hilt
+//    ksp()
 }
