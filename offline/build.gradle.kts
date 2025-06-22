@@ -51,6 +51,6 @@ dependencies {
     ksp(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCore)
 
-    // ☢️Security
-    implementation(Dependencies.securityCrypto)
+//    // ☢️Security
+//    implementation(Dependencies.securityCrypto)
 }

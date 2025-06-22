@@ -83,8 +83,8 @@ class OkHttpModule {
     @RequiresApi(Build.VERSION_CODES.O)
     fun provideOkHttpClient(
         cache: Cache,
-        @HeaderInterceptorAnnotation headerInterceptor: TokenInterceptor,
-        @TokenInterceptorAnnotation tokenInterceptor: TokenInterceptor,
+        @HeaderInterceptorAnnotation headerInterceptor: Interceptor,
+        @TokenInterceptorAnnotation tokenInterceptor: Interceptor,
         loggingInterceptor: HttpLoggingInterceptor
     ): okhttp3.OkHttpClient {
         return okhttp3.OkHttpClient.Builder()

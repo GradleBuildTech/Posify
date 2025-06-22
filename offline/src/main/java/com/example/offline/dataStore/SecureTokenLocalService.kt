@@ -4,7 +4,6 @@ import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.security.KeyStore
@@ -12,7 +11,6 @@ import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
-import javax.inject.Inject
 import androidx.core.content.edit
 
 /*
@@ -21,9 +19,7 @@ import androidx.core.content.edit
 * Created by HungNguyenMinh on 18/6/2025.
 * This service provides secure storage and retrieval of access and refresh tokens using Android's Keystore system.
 * */
-class SecureTokenLocalService @Inject constructor(
-    @ApplicationContext private val context: Context
-) {
+class SecureTokenLocalService(context: Context) {
     companion object {
         private const val PREFS_NAME = "secure_token_prefs"
         private const val KEY_ACCESS_TOKEN = "access_token"

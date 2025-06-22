@@ -16,7 +16,7 @@ object Versions {
     const val navigation = "2.7.0"
     const val hilt = "2.47"
 
-    const val ksp = "1.9.21-1.0.16"
+    const val ksp = "2.0.21-1.0.25"
     const val daggerHilt = "2.47"
     const val okhttp = "4.11.0"
 
