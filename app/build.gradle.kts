@@ -68,6 +68,9 @@ android {
 }
 
 dependencies {
+    //🎉 Module
+    implementation(project(":client"))
+
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.lifecycleRuntimeKtx)

@@ -18,4 +18,7 @@ object Versions {
 
     const val ksp = "1.9.21-1.0.16"
     const val daggerHilt = "2.47"
+    const val okhttp = "4.11.0"
+
+    const val security = "1.1.0-alpha04"
 }

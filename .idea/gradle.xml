@@ -31,6 +31,7 @@
             <option value="$PROJECT_DIR$/feat" />
             <option value="$PROJECT_DIR$/feat/auth" />
             <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/offline" />
             <option value="$PROJECT_DIR$/previewData" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/test/clientTest" />

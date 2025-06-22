@@ -73,4 +73,10 @@ object Dependencies {
     val hiltCore = "com.google.dagger:hilt-android:${Versions.hilt}"
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 
+    // OkHttp
+    val okhttpCore = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+    val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+
+    // Security
+    val securityCrypto = "androidx.security:security-crypto:${Versions.security}"
 }

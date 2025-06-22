@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             PosNativeAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = BuildConfig.APPLICATION_ID,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
