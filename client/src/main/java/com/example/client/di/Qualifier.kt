@@ -14,3 +14,7 @@ annotation class HeaderInterceptorAnnotation
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class TokenInterceptorAnnotation
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MainThreadScope
