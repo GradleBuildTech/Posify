@@ -2,7 +2,7 @@ package com.example.client.di
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.client.interceptoors.TokenInterceptor
+import com.example.client.interceptors.TokenInterceptor
 import com.example.client.services.RefreshTokenService
 import com.example.offline.dataStore.SecureTokenLocalService
 import com.squareup.moshi.Moshi

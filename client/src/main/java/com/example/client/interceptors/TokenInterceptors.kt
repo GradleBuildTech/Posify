@@ -1,4 +1,4 @@
-package com.example.client.interceptoors
+package com.example.client.interceptors
 
 import com.example.client.query.token.RefreshTokenRequest
 import com.example.client.services.RefreshTokenService
