@@ -1,8 +1,7 @@
-package com.example.client.services
+package com.example.data.services
 
 import retrofit2.Response
 import retrofit2.http.GET
-
 
 interface AuthService {
     @GET("auth")

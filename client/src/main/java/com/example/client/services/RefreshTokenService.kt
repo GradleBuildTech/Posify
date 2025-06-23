@@ -1,6 +1,6 @@
 package com.example.client.services
 
-import com.example.client.models.query.token.RefreshTokenRequest
+import com.example.client.query.token.RefreshTokenRequest
 import com.example.client.response.RefreshTokenResponse
 import com.example.client.utils.ApiPath
 import retrofit2.Response

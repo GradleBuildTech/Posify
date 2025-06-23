@@ -3,7 +3,6 @@ package com.example.client.di
 import com.example.client.providers.ApiServiceProvider
 import com.example.client.providers.ConverterFactoryProvider
 import com.example.client.providers.RetrofitProvider
-import com.example.client.services.AuthService
 import com.example.client.services.RefreshTokenService
 import com.example.posNativeApp.BuildConfig
 import com.squareup.moshi.Moshi
@@ -14,8 +13,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
-import javax.inject.Named
-import javax.inject.Singleton
 
 
 @Module
@@ -77,9 +74,6 @@ internal class RetrofitModule {
      * This client is used for making network requests.
      * You can customize it with interceptors, timeouts, etc. if needed.
      */
-    @Provides
-    fun provideAuthService(retrofit: Retrofit): AuthService =
-        ApiServiceProvider.getAuthService(retrofit)
 
     @Provides
     fun provideRefreshTokenService(@RefreshTokeRetrofit retrofit: Retrofit): RefreshTokenService =

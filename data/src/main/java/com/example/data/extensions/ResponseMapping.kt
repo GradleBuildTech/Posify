@@ -1,8 +1,8 @@
 package com.example.data.extensions
 
-import com.example.client.models.response.ErrorResponse
 import com.example.client.providers.moshi.MoshiBuilderProvider
 import com.example.data.adaptor.toModel
+import com.example.data.models.response.ErrorResponse
 import com.example.domain.exceptions.ApiException
 import com.example.domain.exceptions.NoConnectivityException
 import kotlinx.coroutines.flow.FlowCollector

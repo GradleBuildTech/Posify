@@ -37,12 +37,9 @@ android {
 }
 
 dependencies {
-// 🧱 Core AndroidX & Lifecycle
+    // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.androidxAppCompat)
-
-    // 📦 Jetpack Compose UI
-    implementation(Dependencies.material)
 
     // 🧪 Instrumented Testing (UI test, Espresso, etc.)
     testImplementation(Dependencies.junit)
