@@ -1,5 +1,6 @@
 package com.example.client.di
 
+import com.example.client.di.tag.RefreshTokeRetrofit
 import com.example.client.providers.ApiServiceProvider
 import com.example.client.providers.ConverterFactoryProvider
 import com.example.client.providers.RetrofitProvider

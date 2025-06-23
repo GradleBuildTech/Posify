@@ -1,5 +1,6 @@
 package com.example.client.di
 
+import com.example.client.di.tag.MainThreadScope
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

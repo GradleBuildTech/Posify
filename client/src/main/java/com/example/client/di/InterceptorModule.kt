@@ -3,6 +3,10 @@ package com.example.client.di
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.example.client.di.tag.HeaderInterceptorAnnotation
+import com.example.client.di.tag.OfflineInterceptorAnnotation
+import com.example.client.di.tag.OnlineInterceptorAnnotation
+import com.example.client.di.tag.TokenInterceptorAnnotation
 import com.example.client.interceptors.TokenInterceptor
 import com.example.client.services.RefreshTokenService
 import com.example.offline.dataStore.SecureTokenLocalService

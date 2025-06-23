@@ -2,6 +2,7 @@ package com.example.client.di
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.example.client.di.tag.MainThreadScope
 import com.example.client.network.NetworkMonitor
 import com.example.client.network.NetworkStateProvider
 import dagger.Module

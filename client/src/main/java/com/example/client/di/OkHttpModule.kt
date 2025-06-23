@@ -2,6 +2,10 @@ package com.example.client.di
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.client.di.tag.HeaderInterceptorAnnotation
+import com.example.client.di.tag.OfflineInterceptorAnnotation
+import com.example.client.di.tag.OnlineInterceptorAnnotation
+import com.example.client.di.tag.TokenInterceptorAnnotation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,12 +44,12 @@ class OkHttpModule {
         loggingInterceptor: HttpLoggingInterceptor
     ): okhttp3.OkHttpClient {
         return okhttp3.OkHttpClient.Builder()
+            .cache(cache)
             .addInterceptor(headerInterceptor)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(tokenInterceptor)
             .addInterceptor(offlineInterceptor)
             .addNetworkInterceptor(onlineInterceptor)
-            .cache(cache)
             .connectTimeout(duration = Duration.ofSeconds(30))
             .readTimeout(duration = Duration.ofSeconds(30))
             .build()

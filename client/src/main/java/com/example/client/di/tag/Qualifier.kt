@@ -1,4 +1,4 @@
-package com.example.client.di
+package com.example.client.di.tag
 
 import javax.inject.Qualifier
 

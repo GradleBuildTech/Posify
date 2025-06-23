@@ -1,4 +1,6 @@
 package com.example.client.socket
 
-class ErrorDetail {
-}
+data class ErrorDetail(
+    val code: Int,
+    val message: List<String>
+)
