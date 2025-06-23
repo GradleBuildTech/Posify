@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.domain"
-    compileSdk = 35
+    namespace = Android.applicationId
+    compileSdk = Android.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Android.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -37,11 +37,17 @@ android {
 }
 
 dependencies {
+// 🧱 Core AndroidX & Lifecycle
+    implementation(Dependencies.androidxCoreKtx)
+    implementation(Dependencies.androidxAppCompat)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // 📦 Jetpack Compose UI
+    implementation(Dependencies.material)
+
+    // 🧪 Instrumented Testing (UI test, Espresso, etc.)
+    testImplementation(Dependencies.junit)
+    androidTestImplementation(Dependencies.androidxJunit)
+    androidTestImplementation(Dependencies.espressoCore)
+
+
 }
