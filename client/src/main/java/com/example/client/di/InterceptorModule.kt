@@ -11,13 +11,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import java.util.concurrent.TimeUnit
 
 @Module
-@InstallIn
+@InstallIn(SingletonComponent::class)
 class InterceptorModule {
     /**
      * Provides an OkHttp interceptor that adds a "Content-Type" header to each request.
