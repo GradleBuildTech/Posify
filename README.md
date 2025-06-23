@@ -8,7 +8,7 @@ PosNativeApp is a modular Android Point of Sale (POS) application built using Ko
 
 ```mermaid
 graph TD
-    A[app] --> B[feat (auth, ...)]
+    A[app] --> B[feat]
     B --> C[domain]
     C --> D[core]
     C --> E[offline]
