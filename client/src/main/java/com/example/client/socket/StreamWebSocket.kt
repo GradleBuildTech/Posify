@@ -15,7 +15,7 @@ const val SOCKET_CLOSE_REASON = "Client closed the connection"
  *
  * @param socketCreator A function that creates a WebSocket instance with a listener.
  */
-internal class StreamWebSocket(
+class StreamWebSocket(
     socketCreator: (WebSocketListener) -> WebSocket
 ) {
     private val socketEventFlow = MutableSharedFlow<StreamSocketEvent>(extraBufferCapacity = EVENT_BUFFER_SIZE)
@@ -49,6 +49,7 @@ internal class StreamWebSocket(
             }
         }
     })
+
     /* Socket actions */
     fun listen(): Flow<StreamSocketEvent> = socketEventFlow.asSharedFlow()
     fun close() = webSocket.close(SOCKET_CLOSE_CODE, SOCKET_CLOSE_REASON)
@@ -58,7 +59,7 @@ internal class StreamWebSocket(
 /** StreamSocketEvent represents the different types of events that can occur in a WebSocket connection.
  * It includes messages, errors, and other relevant information.
  */
-internal sealed class StreamSocketEvent {
+sealed class StreamSocketEvent {
     data class Error(val error: ErrorMessageResponse) : StreamSocketEvent()
     data class Message(val message: String) : StreamSocketEvent()
 }
