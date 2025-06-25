@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicBoolean
  * * 1. Create an instance of `OrderSocket` with a `SocketFactory` and connection arguments.
  * * 2. Call `start()` to initiate the connection.
  * * 3. Use `sendOrderCreated` and `sendOrderCancelled` to send messages.
- * * * Example:
 * */
 class OrderSocket(
     private val socketFactory: SocketFactory,

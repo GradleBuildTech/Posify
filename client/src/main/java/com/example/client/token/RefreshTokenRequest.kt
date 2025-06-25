@@ -1,4 +1,4 @@
-package com.example.client.query.token
+package com.example.client.token
 
 import com.squareup.moshi.JsonClass
 

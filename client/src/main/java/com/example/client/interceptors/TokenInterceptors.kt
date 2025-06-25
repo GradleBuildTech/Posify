@@ -1,6 +1,6 @@
 package com.example.client.interceptors
 
-import com.example.client.query.token.RefreshTokenRequest
+import com.example.client.token.RefreshTokenRequest
 import com.example.client.services.RefreshTokenService
 import com.example.offline.dataStore.SecureTokenLocalService
 import com.squareup.moshi.Moshi
