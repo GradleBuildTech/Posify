@@ -1,6 +1,6 @@
 package com.example.client.token
 
-import com.example.offline.dataStore.SecureTokenLocalService
+import com.example.client.security.SecureTokenLocalService
 import javax.inject.Inject
 
 /**

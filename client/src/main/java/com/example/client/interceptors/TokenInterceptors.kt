@@ -1,8 +1,8 @@
 package com.example.client.interceptors
 
+import com.example.client.security.SecureTokenLocalService
 import com.example.client.token.RefreshTokenRequest
 import com.example.client.services.RefreshTokenService
-import com.example.offline.dataStore.SecureTokenLocalService
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

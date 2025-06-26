@@ -45,7 +45,7 @@ android {
 
 dependencies {
     //🎉Module
-    implementation(project(":offline"))
+    implementation(project(":core"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)

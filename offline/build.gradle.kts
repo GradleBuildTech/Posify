@@ -35,6 +35,10 @@ android {
 }
 
 dependencies {
+    // 🎉Module
+    implementation(project(":core"))
+    implementation(project(":client"))
+
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.androidxAppCompat)
@@ -51,6 +55,11 @@ dependencies {
     ksp(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCore)
 
-//    // ☢️Security
-//    implementation(Dependencies.securityCrypto)
+    // ☢️Security
+    implementation(Dependencies.securityCrypto)
+
+    // 🗄️ Room
+    ksp(Dependencies.roomCompiler)
+    implementation(Dependencies.roomRuntime)
+    implementation(Dependencies.roomKtx)
 }

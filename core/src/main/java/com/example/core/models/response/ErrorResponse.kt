@@ -1,4 +1,4 @@
-package com.example.data.models.response
+package com.example.core.models.response
 
 import com.squareup.moshi.Json
 

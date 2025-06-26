@@ -2,16 +2,9 @@ package com.example.offline.extensions
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
-fun CoroutineScope.launchCancellable(
-    block: suspend CoroutineScope.() -> Unit
-) {
-    this.launch {
-        try {
-            block()
-        } catch (e: Exception) {
-            // Handle cancellation or other exceptions if needed
-            throw e
-        }
-    }
+internal fun CoroutineScope.lauchWithMutex(mutex: Mutex, block: suspend () -> Unit) = launch {
+    mutex.withLock { block() }
 }

@@ -79,4 +79,9 @@ object Dependencies {
 
     // Security
     val securityCrypto = "androidx.security:security-crypto:${Versions.security}"
+
+    // Room
+    val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    val roomKtx = "androidx.room:room-ktx:${Versions.room}"
 }

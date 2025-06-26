@@ -1,6 +1,6 @@
 package com.example.data.adaptor
 
-import com.example.client.models.response.ErrorResponse
+import com.example.core.models.response.ErrorResponse
 import com.example.domain.models.Error
 
 

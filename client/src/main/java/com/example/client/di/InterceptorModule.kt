@@ -8,8 +8,8 @@ import com.example.client.di.tag.OfflineInterceptorAnnotation
 import com.example.client.di.tag.OnlineInterceptorAnnotation
 import com.example.client.di.tag.TokenInterceptorAnnotation
 import com.example.client.interceptors.TokenInterceptor
+import com.example.client.security.SecureTokenLocalService
 import com.example.client.services.RefreshTokenService
-import com.example.offline.dataStore.SecureTokenLocalService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

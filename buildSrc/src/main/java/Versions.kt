@@ -21,4 +21,6 @@ object Versions {
     const val okhttp = "4.11.0"
 
     const val security = "1.1.0-alpha04"
+
+    const val room = "2.6.1"
 }

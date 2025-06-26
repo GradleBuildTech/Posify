@@ -43,6 +43,7 @@ dependencies {
     // 🎉Module
     implementation(project(":client"))
     implementation(project(":domain"))
+    implementation(project(":core"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)

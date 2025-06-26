@@ -1,4 +1,4 @@
-package com.example.offline.dataStore
+package com.example.client.security
 
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
