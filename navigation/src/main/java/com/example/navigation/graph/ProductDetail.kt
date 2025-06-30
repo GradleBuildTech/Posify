@@ -14,8 +14,7 @@ import com.example.navigation.utils.DestinationRoute
  * It requires a product ID as an argument to display the details of a specific product.
  */
 object ProductDetail: ArgsScreen<String> {
-    override val route: String
-        get() = "${AppDecorator.PRODUCT_DETAIL}/${AppArgument.PRODUCT_ID}"
+    override val route: String = "${AppDecorator.PRODUCT_DETAIL}/${AppArgument.PRODUCT_ID}"
     override val arguments: List<NamedNavArgument> = listOf(
         navArgument(AppArgument.PRODUCT_ID) {type = NavType.StringType}
     )

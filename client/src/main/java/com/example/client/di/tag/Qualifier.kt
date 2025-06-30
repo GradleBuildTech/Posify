@@ -17,11 +17,6 @@ annotation class TokenInterceptorAnnotation
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class MainThreadScope
-
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
 annotation class OnlineInterceptorAnnotation
 
 @Qualifier

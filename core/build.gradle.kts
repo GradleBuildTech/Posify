@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id(BuildPlugins.kspId)
+    id(BuildPlugins.daggerHiltPlugin)
 }
 
 android {
@@ -54,4 +56,8 @@ dependencies {
 
     // 🙈Adaptors
     implementation(Dependencies.moshiKotlin)
+
+    // 🎉 Hilt
+    ksp(Dependencies.hiltCompiler)
+    implementation(Dependencies.hiltCore)
 }

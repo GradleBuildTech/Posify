@@ -1,6 +1,5 @@
-package com.example.client.di
+package com.example.core.di
 
-import com.example.client.di.tag.MainThreadScope
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,11 +10,11 @@ import kotlinx.coroutines.SupervisorJob
 
 @Module
 @InstallIn(SingletonComponent::class)
-class CoroutineModule {
-
+internal object AppModule {
     @Provides
     @MainThreadScope
     fun provideMainThreadDispatcher(): CoroutineScope {
         return CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
     }
 }
+
