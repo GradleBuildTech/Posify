@@ -30,7 +30,7 @@ Composable Screens
 
 ```mermaid
 flowchart TD
-    VM[ViewModel] -->|navigateTo(...)| NAV[Navigator]
+    VM[ViewModel] -->|navigateTo| NAV[Navigator]
     NAV -->|emit Flow| HOST[AppNavigation]
     HOST -->|navController.navigate| Screen[Composable Screen]
 ```
