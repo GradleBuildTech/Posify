@@ -2,7 +2,7 @@ package com.example.offline.repository.domain.order
 
 import androidx.collection.LruCache
 import com.example.core.models.Order
-import com.example.offline.extensions.lauchWithMutex
+import com.example.offline.extensions.launchWithMutex
 import com.example.offline.repository.database.converter.combineWith
 import com.example.offline.utils.DEFAULT_CACHE_SIZE
 import kotlinx.coroutines.CoroutineScope
@@ -36,7 +36,7 @@ internal class DatabaseOrderRepository(
             orderCache[order.orderId] != order
         }.map { it.toEntity() }
         cacheOrder(updatedOrders)
-        scope.lauchWithMutex(mutex) {
+        scope.launchWithMutex(mutex) {
             orderToInsert.takeUnless { it.isEmpty() }?.let {
                 orderDao.insertOrders(it)
             }
@@ -59,7 +59,7 @@ internal class DatabaseOrderRepository(
      */
     fun deleteOrder (cid: String) {
         orderCache.remove(cid)
-        scope.lauchWithMutex(mutex) { orderDao.deleteOrder(cid) }
+        scope.launchWithMutex(mutex) { orderDao.deleteOrder(cid) }
     }
 
 }
