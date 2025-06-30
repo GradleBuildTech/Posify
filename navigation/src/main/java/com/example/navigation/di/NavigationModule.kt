@@ -1,7 +1,7 @@
 package com.example.navigation.di
 
-import com.example.navigation.NavigationService
-import com.example.navigation.Navigator
+import com.example.navigation.core.NavigationService
+import com.example.navigation.core.Navigator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

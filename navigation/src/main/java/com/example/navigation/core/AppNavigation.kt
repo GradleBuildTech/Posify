@@ -1,4 +1,4 @@
-package com.example.navigation
+package com.example.navigation.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

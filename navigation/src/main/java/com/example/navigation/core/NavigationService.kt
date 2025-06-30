@@ -1,4 +1,4 @@
-package com.example.navigation
+package com.example.navigation.core
 
 import androidx.navigation.NavOptionsBuilder
 
