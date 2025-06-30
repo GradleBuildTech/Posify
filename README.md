@@ -97,6 +97,18 @@ cd PosNativeApp
 
 ---
 
+## 📘 Modules in PosNativeApp
+
+| 📁 Module | 📄 README | 🔗 Link |
+|----------------------|--------------------|--------|
+| 🛰️ Client Core (Network) | Network Guide | [Network_readme.md](https://github.com/GradleBuildTech/PosNativeApp/blob/main/client/Network_readme.md) |
+| 🧩 Client Core (Module Structure) | Module Overview | [Module_readme.md](https://github.com/GradleBuildTech/PosNativeApp/blob/main/client/Module_readme.md) |
+| 🔐 Network Layer (Interceptors) | Request/Response Interceptors | [README_Interceptors.md](https://github.com/GradleBuildTech/PosNativeApp/blob/main/client/README_Interceptors.md) |
+| 🌐 Realtime Communication | Custom Socket Handling | [README_Socket.md](https://github.com/GradleBuildTech/PosNativeApp/blob/main/client/src/main/java/com/example/client/socket/README_Socket.md) |
+| 🧭 Navigation System | Navigation Setup & Usage | [NAVIGATION_MODULE_README.md](https://github.com/GradleBuildTech/PosNativeApp/blob/main/navigation/NAVIGATION_MODULE_README.md) |
+| 📦 Offline Storage | Local cache & handling logic | [OFFLINE_MODULE_README.md](https://github.com/GradleBuildTech/PosNativeApp/blob/main/offline/OFFLINE_MODULE_README.md) |
+
+
 ## 🚮 License
 
 MIT License
