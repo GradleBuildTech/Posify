@@ -98,5 +98,4 @@ dependencies {
     debugImplementation(Dependencies.composeUiTestManifest)
 
     // 🎉 Hilt
-//    ksp()
 }

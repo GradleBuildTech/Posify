@@ -33,7 +33,6 @@ object Dependencies {
 
     // Material Design Components
     val material = "com.google.android.material:material:${Versions.material}"
-
     // Lifecycle
     val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntimeKtx}"
 
