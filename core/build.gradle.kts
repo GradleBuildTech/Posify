@@ -42,6 +42,8 @@ dependencies {
 
     // 📦 Jetpack Compose UI
     implementation(Dependencies.material)
+    implementation(Dependencies.lifecycleRuntimeKtx)
+    implementation(Dependencies.activityCompose)
 
     // 🧪 Instrumented Testing (UI test, Espresso, etc.)
     testImplementation(Dependencies.junit)

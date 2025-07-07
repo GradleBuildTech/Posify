@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id(BuildPlugins.kspId)
+    id(BuildPlugins.daggerHiltPlugin)
 }
 
 val configProperties = BuildConfig.projectConfigurations(project)
@@ -70,6 +72,7 @@ android {
 dependencies {
     //🎉 Module
     implementation(project(":client"))
+    implementation(project(":navigation"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
@@ -98,4 +101,6 @@ dependencies {
     debugImplementation(Dependencies.composeUiTestManifest)
 
     // 🎉 Hilt
+    ksp(Dependencies.hiltCompiler)
+    implementation(Dependencies.hiltCore)
 }
