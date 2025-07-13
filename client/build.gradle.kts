@@ -46,6 +46,7 @@ android {
 dependencies {
     //🎉Module
     implementation(project(":core"))
+    implementation(project(":manager"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)

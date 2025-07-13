@@ -3,6 +3,7 @@ package com.example.client.interceptors
 import com.example.client.security.SecureTokenLocalService
 import com.example.client.token.RefreshTokenRequest
 import com.example.client.services.RefreshTokenService
+import com.example.manager.auth.AuthManager
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,8 +68,14 @@ class TokenInterceptor @Inject constructor(
             }
 
             // Attempt to refresh token
-            val newToken = runBlocking { refreshTokenCall() }
+            val refreshToken = secureTokenLocalService.getRefreshTokenSync()// No refresh token available
+            if(refreshToken.isNullOrEmpty()) {
+                AuthManager.setUnauthenticated()
+                return originalResponse // No refresh token, return original response
+            }
+            val newToken = runBlocking { refreshTokenCall(refreshToken) }
             if (newToken.isNullOrEmpty()) {
+                AuthManager.setUnauthenticated("Token refresh failed")
                 return originalResponse // Refresh failed
             }
 
@@ -86,10 +93,7 @@ class TokenInterceptor @Inject constructor(
      * Refreshes the token using the refresh token API.
      * @return The new access token or null if refresh fails.
      */
-    private suspend fun refreshTokenCall(): String? {
-        val refreshToken = secureTokenLocalService.getRefreshTokenSync() ?: return null
-        if (refreshToken.isEmpty()) return null
-
+    private suspend fun refreshTokenCall(refreshToken: String): String? {
         return try {
             val response = refreshTokService.refreshToken(RefreshTokenRequest(refreshToken))
             if (response.isSuccessful) {
