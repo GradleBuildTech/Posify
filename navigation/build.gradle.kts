@@ -41,6 +41,7 @@ android {
 dependencies {
     // 🎉Module
     implementation(project(":core"))
+    implementation(project(":client"))
 
     // 🚧Navigation
     implementation(Dependencies.composeNavigation)

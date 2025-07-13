@@ -119,8 +119,6 @@ class InterceptorModule {
         return Interceptor{ chain ->
             val response = chain.proceed(chain.request())
             val cacheControl = CacheControl.Builder()
-//                .maxAge(5, TimeUnit.MINUTES) // Cache responses for 5 minutes
-//                .build()
                 .noCache()
                 .build()
 
