@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id(BuildPlugins.kspId)
     id(BuildPlugins.daggerHiltPlugin)
 }
 
 android {
-    namespace = Android.applicationId
+    namespace = Android.navigationNameSpace
     compileSdk = Android.compileSdk
 
     defaultConfig {
@@ -33,7 +34,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        buildConfig = true
+        compose = true
     }
 
 }
@@ -41,7 +42,8 @@ android {
 dependencies {
     // 🎉Module
     implementation(project(":core"))
-    implementation(project(":client"))
+    implementation(project(":manager"))
+    implementation(project(":feat:auth"))
 
     // 🚧Navigation
     implementation(Dependencies.composeNavigation)

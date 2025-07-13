@@ -19,4 +19,6 @@ internal class RepistoryModule {
             orderDao, CoroutineScope(Dispatchers.IO)
         )
     }
+
 }
+

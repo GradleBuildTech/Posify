@@ -19,6 +19,16 @@ object BuildPlugins {
 // ✅ Android app configuration constants (used in app module's build.gradle.kts)
 object Android {
     const val applicationId = "com.example.posNativeApp"
+    const val dataNameSpace = "com.example.data"
+    const val managerNameSpace = "com.example.manager"
+    const val coreNameSpace = "com.example.core"
+    const val clientNameSpace = "com.example.client"
+    const val componentNameSpace = "com.example.component"
+    const val domainNameSpace = "com.example.domain"
+    const val offlineNameSpace = "com.example.offline"
+    const val navigationNameSpace = "com.example.navigation"
+    const val authNameSpace = "com.example.auth"
+
     const val compileSdk = 35
     const val minSdk = 24
     const val targetSdk = 35

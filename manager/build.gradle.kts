@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = Android.componentNameSpace
+    namespace = Android.managerNameSpace
     compileSdk = Android.compileSdk
 
     defaultConfig {
@@ -30,35 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
-    buildFeatures {
-        buildConfig = true
-    }
-
 }
 
 dependencies {
-
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.androidxAppCompat)
-    implementation(Dependencies.material)
-
-    // 🧪 Instrumented Testing (UI test, Espresso, etc.)
-    testImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.androidxJunit)
-    androidTestImplementation(Dependencies.espressoCore)
-
-    // 🏫 Compose
-    implementation(Dependencies.lifecycleRuntimeKtx)
-    implementation(Dependencies.activityCompose)
-    implementation(platform(Dependencies.composeBom))
-    implementation(Dependencies.composeUi)
-    implementation(Dependencies.composeUiGraphics)
-    implementation(Dependencies.composeUiToolingPreview)
-    implementation(Dependencies.composeMaterial3)
-
-    debugImplementation(Dependencies.composeUiTooling)
-    debugImplementation(Dependencies.composeUiTestManifest)
-
 }

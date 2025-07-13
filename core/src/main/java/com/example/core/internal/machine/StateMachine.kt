@@ -43,8 +43,9 @@ typealias StateFunction<S, E> = Map<KClass<out S>, Map<KClass<out E>, StateHandl
  *    stateMachine.sendEvent(EventB(" World"))
  *    println(stateMachine.state) // Output: StateA(data="Hello World")
  * ```
-
  */
+
+
 class StateMachine<S: Any, E: Any>(
     initialState: S,
     private val stateFunction: StateFunction<S, E>,

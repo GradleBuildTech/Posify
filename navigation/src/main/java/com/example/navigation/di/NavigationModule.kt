@@ -14,3 +14,4 @@ internal object NavigationModule {
     @Provides
     fun provideNavigationGraph(navigator: Navigator): NavigationService = navigator
 }
+

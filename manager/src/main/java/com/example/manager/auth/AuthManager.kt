@@ -1,4 +1,4 @@
-package com.example.client.manager.auth
+package com.example.manager.auth
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -21,3 +21,5 @@ class ServiceModule {
     fun provideAuthService(retrofit: Retrofit): AuthService =
         ApiServiceProvider.getAuthService(retrofit)
 }
+
+

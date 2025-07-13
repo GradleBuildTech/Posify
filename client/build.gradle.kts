@@ -8,7 +8,7 @@ plugins {
 val configProperties = BuildConfig.projectConfigurations(project)
 
 android {
-    namespace = Android.applicationId
+    namespace = Android.clientNameSpace
     compileSdk = Android.compileSdk
 
     defaultConfig {

@@ -1,11 +1,11 @@
 package com.example.client.di
 
+import com.example.client.BuildConfig
 import com.example.client.di.tag.RefreshTokeRetrofit
 import com.example.client.providers.ApiServiceProvider
 import com.example.client.providers.ConverterFactoryProvider
 import com.example.client.providers.RetrofitProvider
 import com.example.client.services.RefreshTokenService
-import com.example.posNativeApp.BuildConfig
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -79,4 +79,5 @@ internal class RetrofitModule {
     @Provides
     fun provideRefreshTokenService(@RefreshTokeRetrofit retrofit: Retrofit): RefreshTokenService =
         ApiServiceProvider.getRefreshTokenService(retrofit)
+
 }

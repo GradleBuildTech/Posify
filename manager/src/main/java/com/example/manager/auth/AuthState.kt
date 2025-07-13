@@ -1,4 +1,4 @@
-package com.example.client.manager.auth
+package com.example.manager.auth
 
 /**
  * Represents the state of authentication in the application.

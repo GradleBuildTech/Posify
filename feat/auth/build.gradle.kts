@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.example.auth"
-    compileSdk = 35
+    namespace = Android.authNameSpace
+    compileSdk = Android.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = Android.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,16 +32,20 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        buildConfig = true
+        compose = true
     }
 }
 
 dependencies {
+    // 🧱 Core AndroidX & Lifecycle
+    implementation(Dependencies.androidxCoreKtx)
+    implementation(Dependencies.androidxAppCompat)
+    implementation(Dependencies.material)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // 🏫 Compose
+    implementation(Dependencies.lifecycleRuntimeKtx)
+    implementation(Dependencies.activityCompose)
+    implementation(platform(Dependencies.composeBom))
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeMaterial3)
 }

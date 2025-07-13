@@ -20,6 +20,7 @@ import androidx.core.content.edit
 * This service provides secure storage and retrieval of access and refresh tokens using Android's Keystore system.
 * */
 class SecureTokenLocalService(context: Context) {
+
     companion object {
         private const val PREFS_NAME = "secure_token_prefs"
         private const val KEY_ACCESS_TOKEN = "access_token"

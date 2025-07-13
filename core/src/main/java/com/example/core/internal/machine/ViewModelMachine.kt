@@ -18,14 +18,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-///✨===============================================
-///[StateAndEventViewModel] is an abstract class that extends [ViewModel].
-///This class is used to handle the state and events in the view model.
-///[UiState] is the state of the view model.
-///[Event] is the event of the view model.
-///[initialState] is the initial state of the view model.
-///✨===============================================
-
+/**
+ * A base ViewModel class that manages UI state and events.
+ * It provides a structured way to handle events and update the UI state.
+ * This class is designed to be extended by other ViewModels
+ * that need to manage both state and events.
+ */
 abstract class StateAndEventViewModel<UiState, Event>(initialState: UiState) : ViewModel() {
     private val events = MutableSharedFlow<Event>(replay = 0)
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(initialState)

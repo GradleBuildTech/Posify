@@ -4,19 +4,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.navigation.graph.DetailScreen
 import com.example.navigation.utils.AppDecorator
 import kotlinx.coroutines.flow.collectLatest
 import androidx.navigation.compose.NavHost
-import com.example.client.manager.auth.AuthManager
-import com.example.client.manager.auth.AuthState
-import com.example.navigation.graph.detailGraph
+import androidx.navigation.compose.composable
+import com.example.auth.AuthScreen
+import com.example.auth.TestOrderScreen
+import com.example.auth.TestProductDetailScreen
+import com.example.manager.auth.AuthManager
+import com.example.manager.auth.AuthState
+import com.example.navigation.graph.DetailGraph
 
 // This file defines the main navigation host for the application.
 @Composable
 fun AppNavigation(
     navigator: Navigator,
-    detailScreen: DetailScreen,
 ) {
     val navController = rememberNavController()
     val actions = navigator.actions
@@ -65,10 +67,22 @@ fun AppNavigation(
         }
     }
 
+
     NavHost(
         navController = navController,
         startDestination = AppDecorator.AUTH
     ) {
-        detailGraph(screens = detailScreen)
+        composable(DetailGraph.auth.route) {
+            AuthScreen()
+        }
+
+        composable(DetailGraph.order.route) {
+            TestOrderScreen()
+        }
+
+        composable(DetailGraph.productDetail.route, arguments = DetailGraph.productDetail.arguments) {
+            val productId = DetailGraph.productDetail.objectParser(it)
+            TestProductDetailScreen(productId)
+        }
     }
 }
