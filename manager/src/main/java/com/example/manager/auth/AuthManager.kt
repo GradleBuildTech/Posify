@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
  * set unauthenticated state, and check if the user is authenticated.
  */
 object AuthManager {
-    private val _authState = MutableStateFlow<AuthState>(AuthState.Unauthenticated())
+    private val _authState = MutableStateFlow<AuthState>(AuthState.Unknown)
     val authState: StateFlow<AuthState> = _authState
 
 

@@ -8,6 +8,7 @@ package com.example.manager.auth
  * - [Authenticating]: The user is in the process of authenticating, containing a progress indicator.
  */
 sealed class AuthState {
+    data object Unknown : AuthState()
     data class Authenticated(val userId: String) : AuthState()
     data class Unauthenticated(val reason: String? = null) : AuthState()
     data class Authenticating(val progress: Int = 0) : AuthState()

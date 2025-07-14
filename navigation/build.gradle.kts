@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":manager"))
     implementation(project(":feat:auth"))
+    implementation(project(":feat:onboarding"))
 
     // 🚧Navigation
     implementation(Dependencies.composeNavigation)

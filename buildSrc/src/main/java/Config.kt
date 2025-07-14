@@ -28,6 +28,7 @@ object Android {
     const val offlineNameSpace = "com.example.offline"
     const val navigationNameSpace = "com.example.navigation"
     const val authNameSpace = "com.example.auth"
+    const val onboardingNameSpace = "com.example.onboarding"
 
     const val compileSdk = 35
     const val minSdk = 24

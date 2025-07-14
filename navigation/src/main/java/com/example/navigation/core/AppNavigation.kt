@@ -1,5 +1,6 @@
 package com.example.navigation.core
 
+import android.window.SplashScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -14,6 +15,8 @@ import com.example.auth.TestProductDetailScreen
 import com.example.manager.auth.AuthManager
 import com.example.manager.auth.AuthState
 import com.example.navigation.graph.DetailGraph
+import com.example.navigation.graph.Splash
+import com.example.onboarding.splash.SplashScreen
 
 // This file defines the main navigation host for the application.
 @Composable
@@ -70,16 +73,17 @@ fun AppNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = AppDecorator.AUTH
+        startDestination = DetailGraph.startDestination
     ) {
+        composable(DetailGraph.splash.route) {
+            SplashScreen()
+        }
         composable(DetailGraph.auth.route) {
             AuthScreen()
         }
-
         composable(DetailGraph.order.route) {
             TestOrderScreen()
         }
-
         composable(DetailGraph.productDetail.route, arguments = DetailGraph.productDetail.arguments) {
             val productId = DetailGraph.productDetail.objectParser(it)
             TestProductDetailScreen(productId)

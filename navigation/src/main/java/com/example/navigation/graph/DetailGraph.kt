@@ -6,9 +6,10 @@ object DetailGraph: NavigationGraph {
     override val route: String
         get() = ""
     override val startDestination: String
-        get() = auth.destination(Unit)
+        get() = splash.destination(Unit)
 
     val auth = Auth
     val order = Order
     val productDetail = ProductDetail
+    val splash = Splash
 }
