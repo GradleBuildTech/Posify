@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
  * This class is designed to be extended by other ViewModels
  * that need to manage both state and events.
  */
-abstract class StateAndEventViewModel<UiState, Event>(initialState: UiState) : ViewModel() {
+abstract class ViewModelMachine<UiState, Event>(initialState: UiState) : ViewModel() {
     private val events = MutableSharedFlow<Event>(replay = 0)
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(initialState)
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()

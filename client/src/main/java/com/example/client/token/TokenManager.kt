@@ -1,6 +1,6 @@
 package com.example.client.token
 
-internal interface TokenManager {
+interface TokenManager {
     /**
      * Retrieves the current access token.
      *

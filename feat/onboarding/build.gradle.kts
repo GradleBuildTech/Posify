@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id(BuildPlugins.kspId)
+    id(BuildPlugins.daggerHiltPlugin)
 
 }
 
@@ -44,6 +46,8 @@ dependencies {
     // 🎉Module
     implementation(project(":components"))
     implementation(project(":core"))
+    implementation(project(":manager"))
+    implementation(project(":client"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
@@ -56,4 +60,9 @@ dependencies {
     implementation(platform(Dependencies.composeBom))
     implementation(Dependencies.composeUi)
     implementation(Dependencies.composeMaterial3)
+
+    // 🎉 Hilt
+    ksp(Dependencies.hiltCompiler)
+    implementation(Dependencies.hiltCore)
+    implementation(Dependencies.hiltNavigationCompose)
 }

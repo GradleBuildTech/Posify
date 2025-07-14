@@ -18,7 +18,7 @@ internal class TokenManagerImpl @Inject constructor(
 
 
     override fun getAccessToken(): String {
-        return secureTokenLocalService.getAccessTokenSync() ?: throw IllegalStateException("Access token not found")
+        return secureTokenLocalService.getAccessTokenSync() ?: ""
     }
 
     override suspend fun setAccessToken(accessToken: String) {
@@ -28,7 +28,7 @@ internal class TokenManagerImpl @Inject constructor(
     override fun clearAccessToken() { }
 
     override  fun getRefreshToken(): String {
-        return secureTokenLocalService.getRefreshTokenSync() ?: throw IllegalStateException("Refresh token not found")
+        return secureTokenLocalService.getRefreshTokenSync() ?: ""
     }
 
     override suspend fun setRefreshToken(refreshToken: String) {

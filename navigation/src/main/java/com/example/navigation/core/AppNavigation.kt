@@ -1,6 +1,6 @@
 package com.example.navigation.core
 
-import android.window.SplashScreen
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -15,7 +15,6 @@ import com.example.auth.TestProductDetailScreen
 import com.example.manager.auth.AuthManager
 import com.example.manager.auth.AuthState
 import com.example.navigation.graph.DetailGraph
-import com.example.navigation.graph.Splash
 import com.example.onboarding.splash.SplashScreen
 
 // This file defines the main navigation host for the application.
@@ -33,7 +32,8 @@ fun AppNavigation(
      * If the user is authenticated, it navigates to the order screen,
      * if not, it navigates to the auth screen.
      */
-    LaunchedEffect(authState) {
+    LaunchedEffect(authState.value) {
+        Log.d("AppNavigation", "Auth state changed: ${authState.value}")
         when(authState.value) {
             is AuthState.Authenticated -> {
                 // User is authenticated, proceed with navigation

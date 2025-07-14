@@ -53,7 +53,7 @@ class InterceptorModule {
     fun provideTokenInterceptor(
         moshi: Moshi,
         secureTokenLocalService: SecureTokenLocalService,
-        refreshTokenService: RefreshTokenService
+        refreshTokenService: RefreshTokenService,
     ): Interceptor = TokenInterceptor(
         secureTokenLocalService = secureTokenLocalService,
         moshi = moshi,

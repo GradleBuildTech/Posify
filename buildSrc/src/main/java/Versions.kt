@@ -15,6 +15,7 @@ object Versions {
     const val moshi = "1.14.0"
     const val navigation = "2.7.0"
     const val hilt = "2.47"
+    const val hiltNavigationCompose = "1.0.0"
 
     const val ksp = "2.0.21-1.0.25"
     const val daggerHilt = "2.47"

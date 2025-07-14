@@ -73,6 +73,7 @@ dependencies {
     //🎉 Module
     implementation(project(":client"))
     implementation(project(":navigation"))
+    implementation(project(":manager"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)

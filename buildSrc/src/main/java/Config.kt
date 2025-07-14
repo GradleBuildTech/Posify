@@ -82,6 +82,7 @@ object Dependencies {
     // Hilt
     val hiltCore = "com.google.dagger:hilt-android:${Versions.hilt}"
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}"
 
     // OkHttp
     val okhttpCore = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
