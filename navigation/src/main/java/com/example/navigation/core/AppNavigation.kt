@@ -9,7 +9,7 @@ import com.example.navigation.utils.AppDecorator
 import kotlinx.coroutines.flow.collectLatest
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.auth.AuthScreen
+import com.example.onboarding.auth.AuthScreen
 import com.example.auth.TestOrderScreen
 import com.example.auth.TestProductDetailScreen
 import com.example.manager.auth.AuthManager

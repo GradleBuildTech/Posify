@@ -48,6 +48,8 @@ fun BuildAppLoading(
     sizeDp: Dp = 64.dp, // default size
     imageRes: Int, // your local image resource
 ) {
+
+    // Create an infinite transition for the loading animation
     val infiniteTransition = rememberInfiniteTransition(label = "loading_animation")
 
     val animationModifier = when (animationType) {
