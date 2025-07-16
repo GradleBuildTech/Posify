@@ -6,16 +6,13 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.core.lib.constants.DrawbleConst
+import com.example.core.lib.constants.DrawableConst
 
 /**
  * AppLoading is a composable function that displays a loading animation.
@@ -82,13 +79,10 @@ fun BuildAppLoading(
             }
         }
     }
-
-    Image(
-        painter = painterResource(id = imageRes),
-        contentDescription = null,
-        modifier = modifier
-            .then(animationModifier)
-            .size(sizeDp) // apply size to the image
+    BuildAppIcon(
+        imageRes = imageRes,
+        modifier = modifier.then(animationModifier),
+        size = sizeDp
     )
 }
 
@@ -98,6 +92,6 @@ fun AppLoadingPreview() {
     BuildAppLoading(
         animationType = AnimationType.ROTATE,
         sizeDp = 64.dp,
-        imageRes = DrawbleConst.APP_ICON // replace with your actual drawable resource
+        imageRes = DrawableConst.APP_ICON // replace with your actual drawable resource
     )
 }

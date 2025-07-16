@@ -64,6 +64,8 @@ android {
                 applicationIdSuffix = ".${Flavor.LIST_FLAVOR[it]}"
                 versionNameSuffix = "-${Flavor.LIST_FLAVOR[it]}"
                 buildConfigField("String", "BASE_URL", "\"${configProperties["BASE_URL"]}\"")
+                //Change app name
+                resValue("string", "app_name", "${configProperties["APP_NAME"]}")
             }
         }
     }
@@ -104,4 +106,7 @@ dependencies {
     // 🎉 Hilt
     ksp(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCore)
+
+//    // 🎡 Theme
+//    implementation(Dependencies.systemUiController)
 }

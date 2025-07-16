@@ -24,4 +24,6 @@ object Versions {
     const val security = "1.1.0-alpha04"
 
     const val room = "2.6.1"
+
+    const val systemUiController = "0.29.0"
 }

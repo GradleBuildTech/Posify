@@ -1,7 +1,11 @@
 package com.example.onboarding.splash
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -12,7 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.components.common.AnimationType
 import com.example.components.common.BuildAppLoading
-import com.example.core.lib.constants.DrawbleConst
+import com.example.components.common.BuildAppName
+import com.example.core.lib.constants.DesignSystem
+import com.example.core.lib.constants.DrawableConst
+import com.example.core.lib.constants.LayoutConstants
 
 @Composable
 fun SplashScreen(
@@ -27,15 +34,20 @@ fun SplashScreen(
     Scaffold {
         contentPadding ->
         // This is a placeholder for the SplashScreen implementation.
-        Box(
+        Column (
             modifier = Modifier.fillMaxSize().padding(contentPadding),
-            contentAlignment = Alignment.Center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             BuildAppLoading(
                 modifier = Modifier.padding(contentPadding),
                 animationType = AnimationType.SCALE,
                 sizeDp = 120.dp,
-                imageRes = DrawbleConst.APP_ICON // replace with your actual drawable resource
+                imageRes = DrawableConst.APP_ICON // replace with your actual drawable resource
+            )
+            Spacer(modifier = Modifier.height(LayoutConstants.SPACING.dp))
+            BuildAppName(
+                textStyle = DesignSystem.TITLE_LARGE_STYLE
             )
         }
     }
