@@ -3,6 +3,7 @@ package com.example.core.lib.constants
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.core.lib.montserratFontFamily
 
 /**
  * DesignSystem.kt
@@ -16,49 +17,56 @@ object DesignSystem {
     val TITLE_SMALL_STYLE = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
-        letterSpacing = 0.15.sp
+        letterSpacing = 0.15.sp,
+        fontFamily = montserratFontFamily
     )
 
     ///Title medium
     val TITLE_MEDIUM_STYLE = TextStyle(
         fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
-        letterSpacing = 0.15.sp
+        letterSpacing = 0.15.sp,
+        fontFamily = montserratFontFamily
     )
 
     ///Title large
     val TITLE_LARGE_STYLE = TextStyle(
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
-        letterSpacing = 0.15.sp
+        letterSpacing = 0.15.sp,
+        fontFamily = montserratFontFamily
     )
 
     ///Subtitle small
     val SUBTITLE_SMALL_STYLE = TextStyle(
         fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.1.sp,
+        fontFamily = montserratFontFamily
     )
 
     ///Subtitle medium
     val SUBTITLE_MEDIUM_STYLE = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.Normal,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.1.sp,
+        fontFamily = montserratFontFamily
     )
 
     ///Subtitle large
     val SUBTITLE_LARGE_STYLE = TextStyle(
         fontSize = 18.sp,
         fontWeight = FontWeight.Normal,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.1.sp,
+        fontFamily = montserratFontFamily
     )
 
     ///Body small
     val BODY_SMALL_STYLE = TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.1.sp,
+        fontFamily = montserratFontFamily
     )
 
 
