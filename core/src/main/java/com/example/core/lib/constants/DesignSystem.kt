@@ -16,7 +16,7 @@ object DesignSystem {
     ///Title small
     val TITLE_SMALL_STYLE = TextStyle(
         fontSize = 16.sp,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Normal,
         letterSpacing = 0.15.sp,
         fontFamily = montserratFontFamily
     )

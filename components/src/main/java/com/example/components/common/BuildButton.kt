@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BuildButton(
+    modifier: Modifier = Modifier,
     /// The color of the button.
     color: Color = MaterialTheme.colorScheme.primary,
     /// The radius of the button.
@@ -59,7 +60,7 @@ fun BuildButton(
     )
     val borderColorState = borderColor ?: color
 
-    val btnModifier = Modifier
+    val btnModifier = modifier
         .then(
             if (enableWidth && width != null) Modifier.width(width) else Modifier.fillMaxWidth()
         )
