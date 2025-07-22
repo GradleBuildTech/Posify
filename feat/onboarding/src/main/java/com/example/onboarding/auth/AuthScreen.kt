@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
@@ -151,6 +152,7 @@ internal fun LoginForm(
     val primaryColor = MaterialTheme.colorScheme.primary
     var username = ""
     var password = ""
+    var resName = ""
     val fullWidthModifier = Modifier.fillMaxWidth()
 
     var rememberMe = remember { mutableStateOf(false) }
@@ -180,6 +182,21 @@ internal fun LoginForm(
                 )
             )
             Spacer(modifier = Modifier.height(LayoutConstants.TRIPLE_SPACING.dp))
+            BuildTextField(
+                hint = stringResource(R.string.restaurantName),
+                showCancelIcon = false,
+                onSubmit = { resName = it },
+                onValueChangedExternally = { resName = it },
+                modifier = fullWidthModifier,
+                focusColor = primaryColor,
+                leadingIcon = Icons.Default.Home,
+                textStyle = DesignSystem.TITLE_SMALL_STYLE.copy(
+                    fontWeight = FontWeight.Normal
+                ),
+                radius = DisplayMetric.CARD_BORDER_RADIUS.dp
+            )
+            Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
+
             BuildTextField(
                 hint = stringResource(R.string.userName),
                 showCancelIcon = false,
