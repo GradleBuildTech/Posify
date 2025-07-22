@@ -104,7 +104,6 @@ class OrderSocket(
             when (type) {
                 "order_created" -> OrderSocketEvent.OrderCreated(
                     orderId = data.getString("orderId"),
-//                    items = data.optJSONArray("items")?.let { 0.until(it.length()).map { i -> it.getString(i) } } ?: emptyList()
                 )
                 "order_cancelled" -> OrderSocketEvent.OrderCancelled(
                     orderId = data.getString("orderId")

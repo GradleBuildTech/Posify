@@ -16,7 +16,7 @@ object DesignSystem {
     ///Title small
     val TITLE_SMALL_STYLE = TextStyle(
         fontSize = 16.sp,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Normal,
         letterSpacing = 0.15.sp,
         fontFamily = montserratFontFamily
     )
@@ -69,5 +69,44 @@ object DesignSystem {
         fontFamily = montserratFontFamily
     )
 
+    ///Body medium
+    val BODY_MEDIUM_STYLE = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.1.sp,
+        fontFamily = montserratFontFamily
+    )
+
+    ///Body large
+    val BODY_LARGE_STYLE = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.1.sp,
+        fontFamily = montserratFontFamily
+    )
+
+    ///Caption
+    val CAPTION_STYLE = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.4.sp,
+        fontFamily = montserratFontFamily
+    )
+
+    ///Button
+    val BUTTON_STYLE = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 1.25.sp,
+        fontFamily = montserratFontFamily
+    )
+
+    //Big
+    val BIG_TITLE_STYLE = TextStyle(
+        fontSize = 28.sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 0.15.sp,
+        fontFamily = montserratFontFamily
+    )
 
 }

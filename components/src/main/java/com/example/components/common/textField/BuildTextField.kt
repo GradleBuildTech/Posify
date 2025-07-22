@@ -9,7 +9,9 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -20,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -66,7 +69,7 @@ fun BuildTextField(
     maxLines: Int = 1,
     radius: Dp = 8.dp,
     focusColor: Color? = null, // optional focus color
-    unFocusColor: Color? = null, // optional unfocused color
+    leadingIcon: ImageVector? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChangedExternally: ((String) -> Unit)? = null // optional callback
 ) {
@@ -80,6 +83,7 @@ fun BuildTextField(
         )
     }
 
+    val color = focusColor ?: MaterialTheme.colorScheme.primary
     val state = stateMachine.stateFlow.collectAsState()
     val value = state.value.text
 
@@ -104,6 +108,15 @@ fun BuildTextField(
         readOnly = readOnly,
         singleLine = singleLine,
         maxLines = maxLines,
+        leadingIcon = {
+            leadingIcon?.let {
+                Icon(
+                    imageVector = it,
+                    contentDescription = null,
+                    tint = color
+                )
+            }
+        },
         placeholder = {
             if (!hint.isNullOrEmpty()) Text(hint, style = textStyle.copy(color = Color.Gray))
         },
@@ -135,7 +148,7 @@ fun BuildTextField(
                 showEyeIcon && isPassword -> {
                     IconButton(onClick = { isPasswordVisible.value = !isPasswordVisible.value }) {
                         Icon(
-                            imageVector = if (isPasswordVisible.value) Icons.Default.Done else Icons.Default.Done,
+                            imageVector = if (isPasswordVisible.value) Icons.Filled.Done else Icons.Default.Done,
                             contentDescription = if (isPasswordVisible.value) "Hide password" else "Show password"
                         )
                     }
@@ -143,10 +156,10 @@ fun BuildTextField(
             }
         },
         shape = RoundedCornerShape(radius),
-        colors = TextFieldDefaults.colors().copy(
-            focusedContainerColor = focusColor ?: Color.Transparent,
-            unfocusedContainerColor = unFocusColor ?: Color.Transparent,
-        )
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = color,
+            unfocusedBorderColor = color,
+        ),
     )
 }
 
