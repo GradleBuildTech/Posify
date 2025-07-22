@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ứng Dụng Của Tôi</string>
+    <string name="appName">Ứng Dụng Của Tôi</string>
     <string name="greeting">Xin chào!</string>
     <string name="signIn">Đăng Nhập</string>
     <string name="userName">Tên Người Dùng</string>

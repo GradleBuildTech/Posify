@@ -1,6 +1,6 @@
 package com.example.onboarding.auth.controller
 
-enum class AuthState {
+enum class AuthStateUiState {
     IDLE,
     LOADING,
     SUCCESS,

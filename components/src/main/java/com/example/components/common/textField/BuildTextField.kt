@@ -148,7 +148,7 @@ fun BuildTextField(
                 showEyeIcon && isPassword -> {
                     IconButton(onClick = { isPasswordVisible.value = !isPasswordVisible.value }) {
                         Icon(
-                            imageVector = if (isPasswordVisible.value) Icons.Default.Done else Icons.Default.Done,
+                            imageVector = if (isPasswordVisible.value) Icons.Filled.Done else Icons.Default.Done,
                             contentDescription = if (isPasswordVisible.value) "Hide password" else "Show password"
                         )
                     }

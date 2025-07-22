@@ -5,8 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor() : ViewModelMachine<AuthState, AuthEvent>(
-    initialState = AuthState.IDLE
+class AuthViewModel @Inject constructor() : ViewModelMachine<AuthStateUiState, AuthEvent>(
+    initialState = AuthStateUiState.IDLE
 ) {
     override suspend fun handleEvent(event: AuthEvent) {
         when (event) {

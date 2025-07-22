@@ -1,5 +1,6 @@
 package com.example.onboarding.auth
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,11 +23,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -40,13 +44,55 @@ import com.example.core.R
 import com.example.core.lib.constants.DesignSystem
 import com.example.core.lib.constants.DisplayMetric
 import com.example.core.lib.constants.LayoutConstants
+import com.example.onboarding.auth.controller.AuthStateUiState
 import com.example.onboarding.auth.controller.AuthViewModel
 
 
 @Composable
 fun AuthScreen(
-    modifier: Modifier = Modifier,
     authController: AuthViewModel = hiltViewModel()
+) {
+    val state = authController.uiState.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = state.value) {
+        when(state.value) {
+            AuthStateUiState.IDLE -> {}
+            AuthStateUiState.LOADING -> {
+                // Handle loading state if necessary
+            }
+            AuthStateUiState.SUCCESS -> {
+                // Handle success state, e.g., navigate to the next screen
+            }
+            AuthStateUiState.ERROR -> {
+                Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    AuthScreen(
+        modifier = Modifier.fillMaxSize(),
+        onLogin = { username, password ->
+            // Handle login action
+        },
+        onForgotPassword = {
+            // Handle forgot password action
+            Toast.makeText(context, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
+        },
+        onSignUp = {
+            // Handle sign up action
+            Toast.makeText(context, "Sign Up Clicked", Toast.LENGTH_SHORT).show()
+        }
+    )
+
+}
+
+@Composable
+internal fun AuthScreen(
+    modifier: Modifier = Modifier,
+    onLogin: (String, String) -> Unit,
+    onForgotPassword: () -> Unit,
+    onSignUp: () -> Unit
 ) {
     Scaffold { contentPadding ->
         // This is a placeholder for the AuthScreen implementation.
@@ -74,15 +120,9 @@ fun AuthScreen(
                         )
                         Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
                         LoginForm(
-                            onLogin = { username, password ->
-                                // Handle login logic here
-                            },
-                            onForgotPassword = {
-                                // Handle forgot password logic here
-                            },
-                            onSignUp = {
-                                // Handle sign up logic here
-                            }
+                            onLogin = onLogin,
+                            onForgotPassword = onForgotPassword,
+                            onSignUp = onSignUp
                         )
                     }
                     Footer()
@@ -134,9 +174,9 @@ internal fun LoginForm(
             Text(
                 text = stringResource(R.string.signIn),
                 textAlign = TextAlign.Center,
-                style = DesignSystem.TITLE_LARGE_STYLE.copy(
+                style = DesignSystem.BIG_TITLE_STYLE.copy(
                     color = primaryColor,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.Bold
                 )
             )
             Spacer(modifier = Modifier.height(LayoutConstants.TRIPLE_SPACING.dp))

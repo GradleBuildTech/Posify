@@ -8,11 +8,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 /**
  * BuildHeroSection is a composable function that creates a hero section with an icon.
@@ -40,7 +38,7 @@ fun BuildHeroSection(
                 Color.White.copy(alpha = 0.2f),
                 CircleShape
             )
-            .blur(10.dp),
+          ,
         contentAlignment = Alignment.Center
     ) {
         Icon(

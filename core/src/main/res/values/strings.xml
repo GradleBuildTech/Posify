@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">My App</string>
+    <string name="appName">My App</string>
     <string name="greeting">Hello!</string>
     <string name="signIn">Sign In</string>
-    <String name="userName">Username</String>
+    <string name="userName">User name</string>
     <string name="password">Password</string>
     <string name="saveAccount">Save Account</string>
     <string name="forgotPassword">Forgot Password?</string>
     <string name="orSignInWith">Or Sign In With</string>
     <string name="signUp">Sign Up</string>
-    <string name="userName">Username</string>
 </resources>
