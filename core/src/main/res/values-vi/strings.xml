@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Ứng Dụng Của Tôi</string>
+    <string name="greeting">Xin chào!</string>
+    <string name="signIn">Đăng Nhập</string>
+    <string name="userName">Tên Người Dùng</string>
+    <string name="password">Mật Khẩu</string>
+    <string name="saveAccount">Lưu Tài Khoản</string>
+    <string name="forgotPassword">Quên Mật Khẩu?</string>
+    <string name="orSignInWith">Hoặc Đăng Nhập Bằng</string>
+    <string name="signUp">Đăng ký dùng thử</string>
+</resources>

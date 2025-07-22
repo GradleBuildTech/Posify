@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,7 @@ import com.example.components.common.BuildButton
 import com.example.components.common.BuildGradientBackground
 import com.example.components.common.BuildHeroSection
 import com.example.components.common.textField.BuildTextField
+import com.example.core.R
 import com.example.core.lib.constants.DesignSystem
 import com.example.core.lib.constants.DisplayMetric
 import com.example.core.lib.constants.LayoutConstants
@@ -50,7 +52,7 @@ fun AuthScreen(
         // This is a placeholder for the AuthScreen implementation.
         // The actual implementation would include UI components and logic for user authentication.
         BuildGradientBackground(
-            modifier = Modifier.padding(contentPadding),
+            modifier = modifier.padding(contentPadding),
             child = {
                 Column(
                     modifier = Modifier
@@ -130,7 +132,7 @@ internal fun LoginForm(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "Đăng nhập",
+                text = stringResource(R.string.signIn),
                 textAlign = TextAlign.Center,
                 style = DesignSystem.TITLE_LARGE_STYLE.copy(
                     color = primaryColor,
@@ -139,7 +141,7 @@ internal fun LoginForm(
             )
             Spacer(modifier = Modifier.height(LayoutConstants.TRIPLE_SPACING.dp))
             BuildTextField(
-                hint = "Tên đăng nhập",
+                hint = stringResource(R.string.userName),
                 showCancelIcon = false,
                 onSubmit = { username = it },
                 onValueChangedExternally = { username = it },
@@ -153,7 +155,7 @@ internal fun LoginForm(
             )
             Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
             BuildTextField(
-                hint = "Mật khẩu",
+                hint = stringResource(R.string.password),
                 showCancelIcon = false,
                 onSubmit = { password = it },
                 onValueChangedExternally = { password = it },
@@ -182,13 +184,13 @@ internal fun LoginForm(
 
                     )
                     Text(
-                        text = "Lưu tài khoản",
+                        text = stringResource(R.string.saveAccount),
                         style = DesignSystem.TITLE_SMALL_STYLE
                     )
                 }
 
                 Text(
-                    text = "Quên mật khẩu?",
+                    text = stringResource(R.string.forgotPassword),
                     style = DesignSystem.TITLE_SMALL_STYLE.copy(
                         color = primaryColor,
                     ),
@@ -204,7 +206,7 @@ internal fun LoginForm(
 
             ) {
                 Text(
-                    text = "Đăng nhập",
+                    text = stringResource(R.string.signIn),
                     textAlign = TextAlign.Center,
                     modifier = fullWidthModifier,
                     style = DesignSystem.TITLE_MEDIUM_STYLE.copy(
@@ -220,7 +222,7 @@ internal fun LoginForm(
             ) {
                 Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
                 Text(
-                    text = " Hoặc đăng nhập bằng ",
+                    text = stringResource(R.string.orSignInWith),
                     style = DesignSystem.TITLE_SMALL_STYLE,
                 )
                 Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
@@ -235,7 +237,7 @@ internal fun LoginForm(
                 onPress = { onSignUp() },
             ) {
                 Text(
-                    text = "Đăng ký dùng thử",
+                    text = stringResource(R.string.signUp),
                     textAlign = TextAlign.Center,
                     modifier = fullWidthModifier,
                     style = DesignSystem.TITLE_MEDIUM_STYLE.copy(
