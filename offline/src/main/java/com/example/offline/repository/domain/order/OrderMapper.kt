@@ -6,12 +6,12 @@ import com.example.core.models.Order
  * Mapper to convert between OrderEntity and Order model.
  */
 
-fun OrderEntity.toModel(orderEntity: OrderEntity): Order {
+fun OrderEntity.toModel(): Order {
     return Order(
-        orderEntity.cid,
-        orderEntity.customerId,
-        orderEntity.status ,
-        orderEntity.totalAmount
+        this.cid,
+        this.customerId,
+        this.status ,
+        this.totalAmount
     )
 }
 

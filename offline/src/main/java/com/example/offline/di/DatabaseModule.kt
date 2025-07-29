@@ -13,6 +13,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal class DatabaseModule {
+
     @Provides
     @Singleton
     fun provideAppDatabase(
@@ -26,4 +27,6 @@ internal class DatabaseModule {
     @Provides
     fun provideOrderDao(appDatabase: AppDatabase) = appDatabase.orderDao()
 
+    @Provides
+    fun provideOrgDao(appDatabase: AppDatabase) = appDatabase.orgDao()
 }

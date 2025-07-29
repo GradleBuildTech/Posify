@@ -37,6 +37,9 @@ android {
 }
 
 dependencies {
+    // 🎉Module
+    implementation(project(":navigation"))
+
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.androidxAppCompat)

@@ -2,6 +2,8 @@ package com.example.offline.di
 
 import com.example.offline.repository.domain.order.DatabaseOrderRepository
 import com.example.offline.repository.domain.order.OrderDao
+import com.example.offline.repository.domain.org.DatabaseOrgRepository
+import com.example.offline.repository.domain.org.OrgDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,5 +22,12 @@ internal class RepistoryModule {
         )
     }
 
+    // Add more repository providers here as needed
+    @Provides
+    fun provideOrgRepository(orgDao: OrgDao): DatabaseOrgRepository {
+        return DatabaseOrgRepository(
+            orgDao, CoroutineScope(Dispatchers.IO)
+        )
+    }
 }
 

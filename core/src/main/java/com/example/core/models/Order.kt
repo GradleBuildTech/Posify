@@ -6,7 +6,6 @@ class Order {
     var status: String = ""
     var totalAmount: Double = 0.0
 
-    constructor()
 
     constructor(orderId: String, customerId: String, status: String, totalAmount: Double) {
         this.orderId = orderId
