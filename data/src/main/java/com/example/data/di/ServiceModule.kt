@@ -20,6 +20,10 @@ class ServiceModule {
     @Provides
     fun provideAuthService(retrofit: Retrofit): AuthService =
         ApiServiceProvider.getAuthService(retrofit)
+
+    @Provides
+    fun provideMetaService(retrofit: Retrofit): com.example.data.services.MetaService =
+        ApiServiceProvider.getMetaService(retrofit)
 }
 
 

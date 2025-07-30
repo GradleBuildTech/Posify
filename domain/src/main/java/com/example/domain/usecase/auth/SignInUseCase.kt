@@ -1,0 +1,62 @@
+package com.example.domain.usecase.auth
+
+import com.example.client.security.SecureTokenLocalService
+import com.example.core.di.IODispatcher
+import com.example.core.models.Org
+import com.example.core.models.User
+import com.example.core.models.request.auth.SignInRequest
+import com.example.core.models.stateData.Either
+import com.example.core.models.stateData.ExceptionState
+import com.example.data.extensions.mapAndConverterToStateData
+import com.example.domain.repositories.AuthRepositories
+import com.example.domain.repositories.MetaRepositories
+import com.example.offline.repository.domain.org.DatabaseOrgRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
+
+class SignInUseCase @Inject constructor(
+    private val authRepositories: AuthRepositories,
+    private val metaRepositories: MetaRepositories,
+    private val orgRepositories: DatabaseOrgRepository,
+    private val secureTokenLocalService: SecureTokenLocalService,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher
+) {
+    operator fun invoke(
+        email: String,
+        password: String,
+        domainUrl: String,
+    ): Flow<Either<ExceptionState, User>> = flow {
+        if(domainUrl.trim().isNotEmpty()) {
+            val tenantResponse = metaRepositories
+                .getTenantByDomain(domainUrl.trim())
+                .first().mapAndConverterToStateData()
+            if(tenantResponse.isLeft()) {
+               return@flow emit(Either.Left(tenantResponse.leftValue()!!))
+            }
+            val tenantValue = tenantResponse.rightValue()
+            orgRepositories.insertOrg(Org(
+                tenantId = tenantValue?.id?.toString().orEmpty(),
+                name = tenantValue?.name.orEmpty(),
+                tenantName = tenantValue?.name
+            ))
+            secureTokenLocalService.cleearTokens()
+            val signIn = authRepositories.login(
+                SignInRequest(
+                    userName = email,
+                    password = password,
+                )
+            ).first().mapAndConverterToStateData()
+            return@flow emit(signIn)
+        }
+        return@flow emit(authRepositories.login(
+            SignInRequest(
+                userName = email,
+                password = password,
+            )
+        ).first().mapAndConverterToStateData())
+    }.flowOn(ioDispatcher)
+}

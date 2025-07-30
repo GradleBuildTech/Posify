@@ -1,16 +1,23 @@
 package com.example.core.models
 
-// This file defines a User data class that represents a user in the system.
+import com.example.core.models.meta.OrgAccess
+import com.example.core.models.meta.PosTerminalAccess
+import com.example.core.models.meta.RoleAccess
+import com.example.core.models.meta.Tennant
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class User(
-    val id: String,
-    val name: String,
-    val email: String,
-    val phoneNumber: String? = null,
-    val address: String? = null,
-    val profilePictureUrl: String? = null,
-    val isActive: Boolean = true
-) {
-    override fun toString(): String {
-        return "User(id='$id', name='$name', email='$email', phoneNumber=$phoneNumber, address=$address, profilePictureUrl=$profilePictureUrl, isActive=$isActive)"
-    }
-}
+    val id: Int? = null,
+    val fullName: String? = null,
+    val phone: String? = null,
+    val userName: String? = null,
+    val email: String? = null,
+    val jwtToken: String? = null,
+    val refreshToken: String? = null,
+    val tenant: Tennant? = null,
+    val isFirstLogin: Boolean? = null,
+    val orgAccess: List<OrgAccess> = emptyList(),
+    val roleAccess: List<RoleAccess> = emptyList(),
+    val posTerminalAccess: List<PosTerminalAccess> = emptyList()
+)

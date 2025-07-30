@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":manager"))
     implementation(project(":client"))
     implementation(project(":offline"))
+    implementation(project(":domain"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)

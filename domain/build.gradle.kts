@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id(BuildPlugins.kspId)
+    id(BuildPlugins.daggerHiltPlugin)
 }
 
 android {
@@ -37,6 +39,12 @@ android {
 }
 
 dependencies {
+    // 🎉Module
+    implementation(project(":core"))
+    implementation(project(":data"))
+    implementation(project(":offline"))
+    implementation(project(":client"))
+
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.androidxAppCompat)
@@ -46,5 +54,8 @@ dependencies {
     androidTestImplementation(Dependencies.androidxJunit)
     androidTestImplementation(Dependencies.espressoCore)
 
+    // 🎉 Hilt
+    ksp(Dependencies.hiltCompiler)
+    implementation(Dependencies.hiltCore)
 
 }

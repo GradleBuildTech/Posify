@@ -79,7 +79,11 @@ fun AppNavigation(
             SplashScreen()
         }
         composable(DetailGraph.auth.route) {
-            AuthScreen()
+            AuthScreen(
+                openSignUp =  {
+                    navController.navigate(DetailGraph.order.route)
+                }
+            )
         }
         composable(DetailGraph.order.route) {
             TestOrderScreen()

@@ -1,17 +1,17 @@
 package com.example.core.models
 
 data class Org(
-    val orgId: String,
     val tenantId: String,
-    val posTerminalId: String,
-    val roleId: String,
-    val deviceToken: String,
-    val userNameGetToken: String,
-    val passwordGetToken: String,
-    val userId: String,
-    val tenantName: String,
-    val roleCode: String,
-    val orgName: String,
-    val routeFunction: String
-
+    val name: String,
+    val orgId: Int? = null,
+    val posTerminalId: Int? = null,
+    val roleId: Int? = null,
+    val deviceToken: String? = null,
+    val userNameGetToken: String? = null,
+    val passwordGetToken: String? = null,
+    val userId: Int? = null,
+    val tenantName: String? = null,
+    val roleCode: String? = null,
+    val orgName: String? = null,
+    val routeFunction: String? = null
 )

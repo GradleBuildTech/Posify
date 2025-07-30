@@ -45,18 +45,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":core"))
 
-    // 🧱 Core AndroidX & Lifecycle
-    implementation(Dependencies.androidxCoreKtx)
-    implementation(Dependencies.androidxAppCompat)
-
-    // 📦 Jetpack Compose UI
-    implementation(Dependencies.material)
-
-    // 🧪 Instrumented Testing (UI test, Espresso, etc.)
-    testImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.androidxJunit)
-    androidTestImplementation(Dependencies.espressoCore)
-
     // 🛜 Networking
     implementation(Dependencies.retrofitCore)
     implementation(Dependencies.retrofitMoshiConverter)

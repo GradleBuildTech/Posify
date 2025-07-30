@@ -133,4 +133,14 @@ class SecureTokenLocalService(context: Context) {
     suspend fun getRefreshToken(): String? = withContext(Dispatchers.IO) {
         getRefreshTokenSync()
     }
+
+
+    suspend fun cleearTokens() = withContext(Dispatchers.IO) {
+        sharedPreferences.edit {
+            remove(KEY_ACCESS_TOKEN)
+            remove(KEY_REFRESH_TOKEN)
+            remove(KEY_IV_ACCESS)
+            remove(KEY_IV_REFRESH)
+        }
+    }
 }

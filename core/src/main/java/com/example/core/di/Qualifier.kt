@@ -5,3 +5,8 @@ import javax.inject.Qualifier
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class MainThreadScope
+
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class IODispatcher

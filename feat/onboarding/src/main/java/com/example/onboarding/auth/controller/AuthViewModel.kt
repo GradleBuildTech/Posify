@@ -1,30 +1,21 @@
 package com.example.onboarding.auth.controller
 
-import com.example.client.security.SecureTokenLocalService
 import com.example.core.internal.machine.ViewModelMachine
-import com.example.navigation.core.NavigationService
-import com.example.offline.repository.domain.org.DatabaseOrgRepository
+import com.example.core.models.User
+import com.example.domain.usecase.auth.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    /**
-     * [orgDatabaseRepository] is used to interact with the organization database.
-     */
-    private val orgDatabaseRepository: DatabaseOrgRepository,
-
-    /**
-     * [secureTokenLocalService] is used to manage secure tokens locally.
-     */
-    private val secureTokenLocalService: SecureTokenLocalService
+    private val signInUseCase: SignInUseCase
 ) : ViewModelMachine<AuthStateUiState, AuthEvent>(
     initialState = AuthStateUiState.IDLE
 ) {
     override suspend fun handleEvent(event: AuthEvent) {
         when (event) {
             is AuthEvent.SignIn -> {
-                handleSignIn(event.username, event.password)
+                handleSignIn(event.username, event.password, event.domainUrl)
             }
             AuthEvent.NavigateToMain -> {
 
@@ -32,7 +23,25 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    private fun handleSignIn(username: String, password: String) {
-        // Handle sign-in logic here
+    private suspend fun handleSignIn(username: String, password: String, domainUrl: String) {
+        setUiState { AuthStateUiState.LOADING }
+        signInUseCase.invoke(
+            email = username,
+            password = password,
+            domainUrl = domainUrl
+        ).collect { either ->
+            if(either.isLeft()) {
+                return@collect setUiState { AuthStateUiState.ERROR }
+            }
+            either.rightValue()?.let { user ->
+                saveInformation(user)
+            } ?: run {
+                setUiState { AuthStateUiState.ERROR }
+            }
+        }
+    }
+
+    private fun saveInformation(user: User) {
+
     }
 }

@@ -42,16 +42,20 @@ import com.example.components.common.BuildGradientBackground
 import com.example.components.common.BuildHeroSection
 import com.example.components.common.textField.BuildTextField
 import com.example.core.R
+import com.example.core.extensions.showToast
 import com.example.core.lib.constants.DesignSystem
 import com.example.core.lib.constants.DisplayMetric
 import com.example.core.lib.constants.LayoutConstants
+import com.example.onboarding.auth.controller.AuthEvent
 import com.example.onboarding.auth.controller.AuthStateUiState
 import com.example.onboarding.auth.controller.AuthViewModel
+import com.example.onboarding.auth.controller.isLoading
 
 
 @Composable
 fun AuthScreen(
-    authController: AuthViewModel = hiltViewModel()
+    authController: AuthViewModel = hiltViewModel(),
+    openSignUp: () -> Unit,
 ) {
     val state = authController.uiState.collectAsState()
     val context = LocalContext.current
@@ -66,24 +70,26 @@ fun AuthScreen(
                 // Handle success state, e.g., navigate to the next screen
             }
             AuthStateUiState.ERROR -> {
-                Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+                context.showToast(message = "An error occurred during authentication")
             }
         }
     }
 
     AuthScreen(
         modifier = Modifier.fillMaxSize(),
-        onLogin = { username, password ->
-            // Handle login action
+        onLogin = { username, password, domainUrl ->
+            authController.onEvent(AuthEvent.SignIn(
+                username = username,
+                password = password,
+                domainUrl = domainUrl
+            ))
         },
         onForgotPassword = {
             // Handle forgot password action
             Toast.makeText(context, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
         },
-        onSignUp = {
-            // Handle sign up action
-            Toast.makeText(context, "Sign Up Clicked", Toast.LENGTH_SHORT).show()
-        }
+        onSignUp = openSignUp,
+        isSignInLoading = state.value.isLoading()
     )
 
 }
@@ -91,9 +97,10 @@ fun AuthScreen(
 @Composable
 internal fun AuthScreen(
     modifier: Modifier = Modifier,
-    onLogin: (String, String) -> Unit,
+    onLogin: (String, String, String) -> Unit,
     onForgotPassword: () -> Unit,
-    onSignUp: () -> Unit
+    onSignUp: () -> Unit,
+    isSignInLoading: Boolean = false
 ) {
     Scaffold { contentPadding ->
         // This is a placeholder for the AuthScreen implementation.
@@ -123,7 +130,8 @@ internal fun AuthScreen(
                         LoginForm(
                             onLogin = onLogin,
                             onForgotPassword = onForgotPassword,
-                            onSignUp = onSignUp
+                            onSignUp = onSignUp,
+                            isSignInLoading = isSignInLoading,
                         )
                     }
                     Footer()
@@ -145,9 +153,10 @@ internal fun AuthScreen(
 @Composable
 internal fun LoginForm(
     modifier: Modifier = Modifier,
-    onLogin: (String, String) -> Unit,
+    onLogin: (String, String, String) -> Unit,
     onForgotPassword: () -> Unit,
-    onSignUp: () -> Unit
+    onSignUp: () -> Unit,
+    isSignInLoading: Boolean
 ) {
     val primaryColor = MaterialTheme.colorScheme.primary
     var username = ""
@@ -259,8 +268,8 @@ internal fun LoginForm(
                 modifier = Modifier.fillMaxWidth(),
                 color = primaryColor,
                 height = 50.dp,
-                onPress = { onLogin(username, password) },
-
+                loading = isSignInLoading,
+                onPress = { onLogin(username, password, resName) }
             ) {
                 Text(
                     text = stringResource(R.string.signIn),

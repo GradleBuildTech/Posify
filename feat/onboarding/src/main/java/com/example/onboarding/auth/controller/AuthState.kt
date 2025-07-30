@@ -6,3 +6,7 @@ enum class AuthStateUiState {
     SUCCESS,
     ERROR
 }
+
+fun AuthStateUiState.isLoading(): Boolean {
+    return this == AuthStateUiState.LOADING
+}
