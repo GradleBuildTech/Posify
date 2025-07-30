@@ -8,8 +8,8 @@ import com.example.core.models.stateData.Either.Left
 import com.example.core.models.stateData.Either.Right
 import com.example.core.models.stateData.ExceptionState
 import com.example.data.adaptor.toModel
-import com.example.domain.exceptions.ApiException
-import com.example.domain.exceptions.NoConnectivityException
+import com.example.data.exceptions.ApiException
+import com.example.data.exceptions.NoConnectivityException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow

@@ -1,10 +1,10 @@
-package com.example.data.repositories
+package com.example.data.repositories.impl
 
 import com.example.core.models.meta.Tennant
 import com.example.core.models.response.ResponseData
 import com.example.data.extensions.runCatchingApiCall
+import com.example.data.repositories.MetaRepositories
 import com.example.data.services.MetaService
-import com.example.domain.repositories.MetaRepositories
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

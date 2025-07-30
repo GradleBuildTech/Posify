@@ -1,11 +1,11 @@
-package com.example.data.repositories
+package com.example.data.repositories.impl
 
 import com.example.core.models.User
 import com.example.core.models.request.auth.SignInRequest
 import com.example.core.models.response.ResponseData
 import com.example.data.extensions.runCatchingApiCall
+import com.example.data.repositories.AuthRepositories
 import com.example.data.services.AuthService
-import com.example.domain.repositories.AuthRepositories
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

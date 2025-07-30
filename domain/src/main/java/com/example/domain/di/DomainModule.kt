@@ -2,8 +2,8 @@ package com.example.domain.di
 
 import com.example.client.security.SecureTokenLocalService
 import com.example.core.di.IODispatcher
-import com.example.domain.repositories.AuthRepositories
-import com.example.domain.repositories.MetaRepositories
+import com.example.data.repositories.AuthRepositories
+import com.example.data.repositories.MetaRepositories
 import com.example.domain.usecase.auth.SignInUseCase
 import com.example.offline.repository.domain.org.DatabaseOrgRepository
 import dagger.Module

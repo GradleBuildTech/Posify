@@ -8,8 +8,8 @@ import com.example.core.models.request.auth.SignInRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
 import com.example.data.extensions.mapAndConverterToStateData
-import com.example.domain.repositories.AuthRepositories
-import com.example.domain.repositories.MetaRepositories
+import com.example.data.repositories.AuthRepositories
+import com.example.data.repositories.MetaRepositories
 import com.example.offline.repository.domain.org.DatabaseOrgRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

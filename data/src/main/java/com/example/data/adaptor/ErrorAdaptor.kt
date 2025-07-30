@@ -1,7 +1,7 @@
 package com.example.data.adaptor
 
 import com.example.core.models.response.ErrorResponse
-import com.example.domain.models.Error
+import com.example.data.exceptions.Error
 
 
 internal fun ErrorResponse.toModel(): Error = Error(

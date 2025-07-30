@@ -1,6 +1,5 @@
-package com.example.domain.exceptions
+package com.example.data.exceptions
 
-import com.example.domain.models.Error
 
 
 object NoConnectivityException: RuntimeException() {

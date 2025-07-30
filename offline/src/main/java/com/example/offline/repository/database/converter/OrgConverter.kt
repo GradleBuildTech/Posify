@@ -21,7 +21,8 @@ fun OrgEntity.combineWith(
         tenantName = this.tenantName,
         roleCode = this.roleCode,
         orgName = this.orgName,
-        routeFunction = this.routeFunction
+        routeFunction = this.routeFunction,
+        name = this.name
     ).apply {
         cid = "%s:%s".format(orgId, tenantId)
     }

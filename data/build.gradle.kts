@@ -42,7 +42,6 @@ android {
 dependencies {
     // 🎉Module
     implementation(project(":client"))
-    implementation(project(":domain"))
     implementation(project(":core"))
 
     // 🛜 Networking

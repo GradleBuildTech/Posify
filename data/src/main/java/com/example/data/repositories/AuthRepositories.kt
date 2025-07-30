@@ -1,4 +1,4 @@
-package com.example.domain.repositories
+package com.example.data.repositories
 
 import com.example.core.models.User
 import com.example.core.models.request.auth.SignInRequest

@@ -1,4 +1,4 @@
-package com.example.domain.repositories
+package com.example.data.repositories
 
 import com.example.core.models.meta.Tennant
 import com.example.core.models.response.ResponseData

@@ -1,11 +1,11 @@
 package com.example.data.di
 
-import com.example.data.repositories.AuthRepositoriesImpl
-import com.example.data.repositories.MetaRepositoriesImpl
+import com.example.data.repositories.AuthRepositories
+import com.example.data.repositories.MetaRepositories
+import com.example.data.repositories.impl.AuthRepositoriesImpl
+import com.example.data.repositories.impl.MetaRepositoriesImpl
 import com.example.data.services.AuthService
 import com.example.data.services.MetaService
-import com.example.domain.repositories.AuthRepositories
-import com.example.domain.repositories.MetaRepositories
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
