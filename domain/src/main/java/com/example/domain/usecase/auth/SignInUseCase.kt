@@ -1,9 +1,11 @@
 package com.example.domain.usecase.auth
 
+import com.example.client.BuildConfig
 import com.example.client.security.SecureTokenLocalService
 import com.example.core.di.IODispatcher
 import com.example.core.models.Org
 import com.example.core.models.User
+import com.example.core.models.request.auth.AuthRequest
 import com.example.core.models.request.auth.SignInRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
@@ -32,18 +34,36 @@ class SignInUseCase @Inject constructor(
     ): Flow<Either<ExceptionState, User>> = flow {
         if(domainUrl.trim().isNotEmpty()) {
             val tenantResponse = metaRepositories
-                .getTenantByDomain(domainUrl.trim())
+                .getTenantByDomain("${BuildConfig.DOMAIN_URL}${domainUrl.trim()}")
                 .first().mapAndConverterToStateData()
             if(tenantResponse.isLeft()) {
                return@flow emit(Either.Left(tenantResponse.leftValue()!!))
             }
             val tenantValue = tenantResponse.rightValue()
+
+            val tenantId = tenantValue?.id?.toString().orEmpty()
             orgRepositories.insertOrg(Org(
-                tenantId = tenantValue?.id?.toString().orEmpty(),
+                tenantId = tenantId,
                 name = tenantValue?.name.orEmpty(),
                 tenantName = tenantValue?.name
             ))
+
+            val authRequest = AuthRequest(
+                orgId = 1000000,
+                tenantId = tenantValue?.id
+            )
+
+            val authResponse = authRepositories
+                .authenticate(authRequest)
+                .first().mapAndConverterToStateData()
+            if(authResponse.isLeft()) {
+                return@flow emit(Either.Left(authResponse.leftValue()!!))
+            }
+            val jwtToken = authResponse.rightValue()?.jwtToken
+
             secureTokenLocalService.cleearTokens()
+            secureTokenLocalService.saveToken(jwtToken ?: "")
+
             val signIn = authRepositories.login(
                 SignInRequest(
                     userName = email,

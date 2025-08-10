@@ -1,7 +1,9 @@
 package com.example.data.repositories.impl
 
 import com.example.core.models.User
+import com.example.core.models.request.auth.AuthRequest
 import com.example.core.models.request.auth.SignInRequest
+import com.example.core.models.response.AuthResponse
 import com.example.core.models.response.ResponseData
 import com.example.data.extensions.runCatchingApiCall
 import com.example.data.repositories.AuthRepositories
@@ -15,5 +17,10 @@ class AuthRepositoriesImpl @Inject constructor(
     override suspend fun login(signInRequest: SignInRequest): Flow<ResponseData<User>> =
         runCatchingApiCall {
             authService.login(signInRequest)
+        }
+
+    override suspend fun authenticate(authRequest: AuthRequest): Flow<ResponseData<AuthResponse>> =
+        runCatchingApiCall {
+            authService.authenticate(authRequest)
         }
 }

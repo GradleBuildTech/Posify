@@ -64,7 +64,7 @@ android {
                 applicationIdSuffix = ".${Flavor.LIST_FLAVOR[it]}"
                 versionNameSuffix = "-${Flavor.LIST_FLAVOR[it]}"
                 buildConfigField("String", "BASE_URL", "\"${configProperties["BASE_URL"]}\"")
-                //Change app name
+                buildConfigField("String", "DOMAIN_URL", "\"${configProperties["DOMAIN_URL"]}\"")
                 resValue("string", "app_name", "${configProperties["APP_NAME"]}")
             }
         }
@@ -74,6 +74,7 @@ android {
 dependencies {
     //🎉 Module
     implementation(project(":client"))
+    implementation(project(":domain"))
     implementation(project(":navigation"))
     implementation(project(":manager"))
 

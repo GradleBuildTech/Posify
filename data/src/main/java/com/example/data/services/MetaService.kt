@@ -13,8 +13,14 @@ interface MetaService {
         const val GET_BY_DOMAIN = "$TENANT_BRANCH/getbyDomain"
     }
 
+    /**
+     * Get tenant by domain
+     *
+     * @param queryMap Map containing query parameters, e.g., "domainUrl" to specify the domain.
+     * @return Response containing the tenant data wrapped in ResponseData.
+     */
     @GET(GET_BY_DOMAIN)
-    fun getTenantByDomain(
+    suspend fun getTenantByDomain(
         @QueryMap queryMap: Map<String, String>
     ): Response<ResponseData<Tennant>>
 

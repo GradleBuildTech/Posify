@@ -46,9 +46,7 @@ inline fun <T> runCatchingApiCall(
         .onSuccess { response ->
             if (response.isSuccessful) {
                 response.body()?.let { emit(it) }
-                    ?: throw Exception("Empty body from successful response")
-            } else {
-                throw Exception("API error: ${response.errorBody()?.string()}")
+
             }
         }
 }

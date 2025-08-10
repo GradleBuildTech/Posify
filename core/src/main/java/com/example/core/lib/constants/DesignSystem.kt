@@ -15,7 +15,7 @@ object DesignSystem {
 
     ///Title small
     val TITLE_SMALL_STYLE = TextStyle(
-        fontSize = 16.sp,
+        fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
         letterSpacing = 0.15.sp,
         fontFamily = montserratFontFamily
@@ -23,7 +23,7 @@ object DesignSystem {
 
     ///Title medium
     val TITLE_MEDIUM_STYLE = TextStyle(
-        fontSize = 18.sp,
+        fontSize = 14.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.15.sp,
         fontFamily = montserratFontFamily
@@ -31,7 +31,7 @@ object DesignSystem {
 
     ///Title large
     val TITLE_LARGE_STYLE = TextStyle(
-        fontSize = 20.sp,
+        fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         letterSpacing = 0.15.sp,
         fontFamily = montserratFontFamily

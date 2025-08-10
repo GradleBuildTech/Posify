@@ -5,6 +5,7 @@ plugins {
     id(BuildPlugins.daggerHiltPlugin)
 }
 
+val configProperties = BuildConfig.projectConfigurations(project)
 android {
     namespace = Android.domainNameSpace
     compileSdk = Android.compileSdk
@@ -12,8 +13,9 @@ android {
     defaultConfig {
         minSdk = Android.minSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        configProperties.forEach { key, value ->
+            buildConfigField("String", key.toString(), "\"${value}\"")
+        }
     }
 
     buildTypes {
