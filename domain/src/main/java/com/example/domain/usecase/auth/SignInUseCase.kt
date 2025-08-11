@@ -70,6 +70,7 @@ class SignInUseCase @Inject constructor(
                     password = password,
                 )
             ).first().mapAndConverterToStateData()
+
             return@flow emit(signIn)
         }
         return@flow emit(authRepositories.login(

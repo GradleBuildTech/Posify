@@ -9,8 +9,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase
-) : ViewModelMachine<AuthStateUiState, AuthEvent>(
-    initialState = AuthStateUiState.IDLE
+) : ViewModelMachine<AuthState, AuthEvent>(
+    initialState = AuthState()
 ) {
     override suspend fun handleEvent(event: AuthEvent) {
         when (event) {
@@ -24,19 +24,30 @@ class AuthViewModel @Inject constructor(
     }
 
     private suspend fun handleSignIn(username: String, password: String, domainUrl: String) {
-        setUiState { AuthStateUiState.LOADING }
+        setUiState {
+            copy(
+                uiState = AuthStateUiState.LOADING,
+            )
+        }
         signInUseCase.invoke(
             email = username,
             password = password,
             domainUrl = domainUrl
         ).collect { either ->
             if(either.isLeft()) {
-                return@collect setUiState { AuthStateUiState.ERROR }
+                return@collect setUiState {
+                    copy(
+                        uiState = AuthStateUiState.ERROR,
+                        errorMessage = either.leftValue()?.errorMessage
+                    )
+                }
             }
             either.rightValue()?.let { user ->
                 saveInformation(user)
             } ?: run {
-                setUiState { AuthStateUiState.ERROR }
+                setUiState {
+                    copy(uiState = AuthStateUiState.ERROR)
+                }
             }
         }
     }

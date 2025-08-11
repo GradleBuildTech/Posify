@@ -61,7 +61,7 @@ fun AuthScreen(
     val context = LocalContext.current
 
     LaunchedEffect(key1 = state.value) {
-        when(state.value) {
+        when(state.value.uiState) {
             AuthStateUiState.IDLE -> {}
             AuthStateUiState.LOADING -> {
                 // Handle loading state if necessary
@@ -89,7 +89,7 @@ fun AuthScreen(
             Toast.makeText(context, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
         },
         onSignUp = openSignUp,
-        isSignInLoading = state.value.isLoading()
+        isSignInLoading = state.value.uiState.isLoading()
     )
 
 }
