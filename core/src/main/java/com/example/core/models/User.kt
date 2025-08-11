@@ -16,7 +16,7 @@ data class User(
     val jwtToken: String? = null,
     val refreshToken: String? = null,
     val tenant: Tennant? = null,
-    val isFirstLogin: Boolean? = null,
+    val isFirstLogin: String? = null,
     val orgAccess: List<OrgAccess> = emptyList(),
     val roleAccess: List<RoleAccess> = emptyList(),
     val posTerminalAccess: List<PosTerminalAccess> = emptyList()

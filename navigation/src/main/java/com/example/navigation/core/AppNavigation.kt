@@ -41,6 +41,10 @@ fun AppNavigation(
                     navController.navigate(AppDecorator.ORDER) {
                         popUpTo(AppDecorator.AUTH) { inclusive = true }
                     }
+                } else {
+                    navController.navigate(AppDecorator.ORDER) {
+                        popUpTo(AppDecorator.SPLASH) { inclusive = true }
+                    }
                 }
             }
             is AuthState.Unauthenticated -> {

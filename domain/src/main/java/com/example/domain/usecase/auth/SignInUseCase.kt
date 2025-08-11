@@ -36,9 +36,11 @@ class SignInUseCase @Inject constructor(
             val tenantResponse = metaRepositories
                 .getTenantByDomain("${BuildConfig.DOMAIN_URL}${domainUrl.trim()}")
                 .first().mapAndConverterToStateData()
+
             if(tenantResponse.isLeft()) {
                return@flow emit(Either.Left(tenantResponse.leftValue()!!))
             }
+
             val tenantValue = tenantResponse.rightValue()
 
             val tenantId = tenantValue?.id?.toString().orEmpty()
@@ -55,11 +57,9 @@ class SignInUseCase @Inject constructor(
 
             val authResponse = authRepositories
                 .authenticate(authRequest)
-                .first().mapAndConverterToStateData()
-            if(authResponse.isLeft()) {
-                return@flow emit(Either.Left(authResponse.leftValue()!!))
-            }
-            val jwtToken = authResponse.rightValue()?.jwtToken
+                .first()
+
+            val jwtToken = authResponse.jwtToken
 
             secureTokenLocalService.cleearTokens()
             secureTokenLocalService.saveToken(jwtToken ?: "")

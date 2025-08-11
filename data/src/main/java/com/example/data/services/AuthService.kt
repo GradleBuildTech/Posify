@@ -18,15 +18,13 @@ interface AuthService {
         const val AUTHENTICATE = "/app/api/v1/authenticate"
     }
 
-    @GET(AUTHENTICATE)
-   suspend fun authenticate(
-       @Body authRequest: AuthRequest
-   ): Response<ResponseData<AuthResponse>>
+    @POST(AUTHENTICATE)
+    suspend fun authenticate(
+        @Body authRequest: AuthRequest
+    ): Response<AuthResponse>
 
     @POST(LOGIN)
     suspend fun login(
        @Body signInRequest: SignInRequest
     ): Response<ResponseData<User>>
-
-
 }

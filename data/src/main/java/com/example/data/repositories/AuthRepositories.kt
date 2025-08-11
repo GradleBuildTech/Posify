@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepositories {
     suspend fun login(signInRequest: SignInRequest): Flow<ResponseData<User>>
+
+
     suspend fun authenticate(
         authRequest: AuthRequest
-    ): Flow<ResponseData<AuthResponse>>
+    ): Flow<AuthResponse>
 }

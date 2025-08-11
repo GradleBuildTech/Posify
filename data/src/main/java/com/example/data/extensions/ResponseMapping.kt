@@ -76,7 +76,7 @@ fun <R> ResponseData<R>.mapAndConverterToStateData(): Either<ExceptionState, R> 
         Left(
             ExceptionState(
                 errorCode = ErrorCode.INTERNAL_ERROR,
-                errorMessage = this.message
+                errorMessage = this.message ?: "Unknown error",
             )
         )
     }

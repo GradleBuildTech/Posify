@@ -19,7 +19,7 @@ class AuthRepositoriesImpl @Inject constructor(
             authService.login(signInRequest)
         }
 
-    override suspend fun authenticate(authRequest: AuthRequest): Flow<ResponseData<AuthResponse>> =
+    override suspend fun authenticate(authRequest: AuthRequest): Flow<AuthResponse> =
         runCatchingApiCall {
             authService.authenticate(authRequest)
         }
