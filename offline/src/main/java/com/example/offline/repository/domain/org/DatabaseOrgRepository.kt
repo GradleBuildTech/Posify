@@ -29,6 +29,13 @@ class DatabaseOrgRepository(
         insertListOrg(listOf(org.toEntity()))
     }
 
+    fun getOrg(): Org {
+        return orgCache.snapshot().values.firstOrNull()?.toModel() ?: Org(
+            tenantId = "",
+            name = "",
+        )
+    }
+
     /**
      * Inserts a collection of organizations into the database.
      * If an organization with the same cid already exists, it will be combined with the cached version.

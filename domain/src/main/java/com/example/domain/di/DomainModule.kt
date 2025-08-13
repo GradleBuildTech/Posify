@@ -4,8 +4,11 @@ import com.example.client.security.SecureTokenLocalService
 import com.example.core.di.IODispatcher
 import com.example.data.repositories.AuthRepositories
 import com.example.data.repositories.MetaRepositories
+import com.example.domain.usecase.auth.AuthSaveUser
+import com.example.domain.usecase.auth.SaveInformation
 import com.example.domain.usecase.auth.SignInUseCase
 import com.example.offline.repository.domain.org.DatabaseOrgRepository
+import com.example.offline.repository.domain.user.DatabaseUserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +36,25 @@ internal class DomainModule {
             orgRepositories = orgRepositories,
             secureTokenLocalService = secureTokenLocalService,
             ioDispatcher = ioDispatcher
+        )
+    }
+
+    @Provides
+    fun providesAuthSaveUserUseCase(
+        databaseUserRepository: DatabaseUserRepository
+    ): AuthSaveUser {
+        return AuthSaveUser(databaseUserRepository)
+    }
+
+
+    @Provides
+    fun provideSaveInformationUseCase(
+        orgDataBase: DatabaseOrgRepository,
+        secureTokenLocalService: SecureTokenLocalService
+    ): SaveInformation {
+        return SaveInformation(
+            orgDataBase = orgDataBase,
+            secureTokenLocalService = secureTokenLocalService
         )
     }
 }

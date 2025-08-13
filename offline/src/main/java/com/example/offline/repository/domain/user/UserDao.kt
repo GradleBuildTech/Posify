@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @SuppressWarnings("TooManyFunctions")
 @Dao
-internal interface UserDao {
+interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserEntity)
 

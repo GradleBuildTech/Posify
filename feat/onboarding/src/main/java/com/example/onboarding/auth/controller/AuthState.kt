@@ -1,5 +1,6 @@
 package com.example.onboarding.auth.controller
 
+import com.example.core.models.User
 import com.example.core.models.meta.OrgAccess
 import com.example.core.models.meta.PosTerminalAccess
 import com.example.core.models.meta.RoleAccess
@@ -8,7 +9,7 @@ enum class AuthStateUiState {
     IDLE,
     LOADING,
     SUCCESS,
-    ERROR
+    ERROR,
 }
 
 fun AuthStateUiState.isLoading(): Boolean {
@@ -26,6 +27,7 @@ data class AuthState(
     val listPosTerminalAccess: List<PosTerminalAccess> = emptyList(),
 
     ///[Logic data]
+    val userLogin: User? = null,
     val orgSelected: OrgAccess? = null,
     val roleSelected: RoleAccess? = null,
     val posTerminalSelected: PosTerminalAccess? = null

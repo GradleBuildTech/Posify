@@ -16,7 +16,6 @@ internal class TokenManagerImpl @Inject constructor(
     private val secureTokenLocalService: SecureTokenLocalService
 ): TokenManager {
 
-
     override fun getAccessToken(): String {
         return secureTokenLocalService.getAccessTokenSync() ?: ""
     }

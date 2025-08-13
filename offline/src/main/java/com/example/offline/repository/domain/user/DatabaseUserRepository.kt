@@ -10,7 +10,7 @@ import kotlinx.coroutines.sync.Mutex
 
 // Repository for managing users in the database.
 @SuppressWarnings("TooManyFunctions")
-internal class DatabaseUserRepository(
+class DatabaseUserRepository(
     private val userDao: UserDao,
     private val scope: CoroutineScope,
     cacheSize: Int = DEFAULT_CACHE_SIZE

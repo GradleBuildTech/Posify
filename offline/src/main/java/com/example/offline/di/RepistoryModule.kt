@@ -17,6 +17,11 @@ import kotlinx.coroutines.Dispatchers
 @Module
 @InstallIn(SingletonComponent::class)
 internal class RepositoryModule {
+
+    /**
+     * Dispatcher for IO operations.
+     */
+
     @Provides
     fun provideOrderRepository(orderDao: OrderDao): DatabaseOrderRepository {
         return DatabaseOrderRepository(
