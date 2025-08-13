@@ -24,11 +24,7 @@ class AuthViewModel @Inject constructor(
     }
 
     private suspend fun handleSignIn(username: String, password: String, domainUrl: String) {
-        setUiState {
-            copy(
-                uiState = AuthStateUiState.LOADING,
-            )
-        }
+        setUiState { copy(uiState = AuthStateUiState.LOADING) }
         signInUseCase.invoke(
             email = username,
             password = password,
@@ -43,11 +39,7 @@ class AuthViewModel @Inject constructor(
                 }
             }
             either.rightValue()?.let { user ->
-                saveInformation(user)
-            } ?: run {
-                setUiState {
-                    copy(uiState = AuthStateUiState.ERROR)
-                }
+
             }
         }
     }

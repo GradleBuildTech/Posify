@@ -29,4 +29,7 @@ internal class DatabaseModule {
 
     @Provides
     fun provideOrgDao(appDatabase: AppDatabase) = appDatabase.orgDao()
+
+    @Provides
+    fun provideUserDao(appDatabase: AppDatabase) = appDatabase.userDao()
 }

@@ -4,6 +4,8 @@ import com.example.offline.repository.domain.order.DatabaseOrderRepository
 import com.example.offline.repository.domain.order.OrderDao
 import com.example.offline.repository.domain.org.DatabaseOrgRepository
 import com.example.offline.repository.domain.org.OrgDao
+import com.example.offline.repository.domain.user.DatabaseUserRepository
+import com.example.offline.repository.domain.user.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 // Provides the repository for order-related operations
 @Module
 @InstallIn(SingletonComponent::class)
-internal class RepistoryModule {
+internal class RepositoryModule {
     @Provides
     fun provideOrderRepository(orderDao: OrderDao): DatabaseOrderRepository {
         return DatabaseOrderRepository(
@@ -27,6 +29,13 @@ internal class RepistoryModule {
     fun provideOrgRepository(orgDao: OrgDao): DatabaseOrgRepository {
         return DatabaseOrgRepository(
             orgDao, CoroutineScope(Dispatchers.IO)
+        )
+    }
+
+    @Provides
+    fun providesUserRepository(userDao: UserDao): DatabaseUserRepository {
+        return DatabaseUserRepository(
+            userDao, CoroutineScope(Dispatchers.IO)
         )
     }
 }

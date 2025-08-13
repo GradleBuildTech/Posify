@@ -19,7 +19,14 @@ fun AuthStateUiState.isLoading(): Boolean {
 data class AuthState(
     val uiState: AuthStateUiState = AuthStateUiState.IDLE,
     val errorMessage: String? = null,
+
+    ///[Ui Data]
     val listOrg: List<OrgAccess> = emptyList(),
     val listRole: List<RoleAccess> = emptyList(),
     val listPosTerminalAccess: List<PosTerminalAccess> = emptyList(),
+
+    ///[Logic data]
+    val orgSelected: OrgAccess? = null,
+    val roleSelected: RoleAccess? = null,
+    val posTerminalSelected: PosTerminalAccess? = null
 )

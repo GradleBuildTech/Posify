@@ -23,8 +23,7 @@ class SplashController @Inject constructor(
         viewModelScope.launch {
             //Delay for splash screen effect
             kotlinx.coroutines.delay(2000) // Simulate a 2-second splash screen delay
-            val hasToken = tokenManager.getAccessToken()
-            if (hasToken.isNotEmpty()) {
+            if (tokenManager.isAuthenticated()) {
                 Log.d("SplashController", "Token found, authenticating user")
                 AuthManager.authenticate("")
             } else {

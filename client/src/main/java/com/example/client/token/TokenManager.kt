@@ -41,4 +41,8 @@ interface TokenManager {
     fun clearRefreshToken()
 
     fun hasToken(): Boolean
+
+    fun isAuthenticated(): Boolean {
+        return getAccessToken().isNotEmpty() && getRefreshToken().isNotEmpty()
+    }
 }

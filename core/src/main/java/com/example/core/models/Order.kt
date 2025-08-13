@@ -1,6 +1,6 @@
 package com.example.core.models
 
-class Order {
+class  Order {
     var orderId: String = ""
     var customerId: String = ""
     var status: String = ""
