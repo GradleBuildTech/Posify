@@ -70,6 +70,7 @@ class AuthViewModel @Inject constructor(
                 setUiState {
                     copy(
                         userLogin = user,
+                        showSelectRoleForm = true,
                         uiState = AuthStateUiState.SUCCESS,
                         listOrg = listOrg,
                         listRole = listRole,

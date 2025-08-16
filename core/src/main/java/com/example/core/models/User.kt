@@ -4,10 +4,12 @@ import com.example.core.models.meta.OrgAccess
 import com.example.core.models.meta.PosTerminalAccess
 import com.example.core.models.meta.RoleAccess
 import com.example.core.models.meta.Tennant
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class User(
+    @Json(name = "userId")
     val id: Int? = null,
     val fullName: String? = null,
     val phone: String? = null,

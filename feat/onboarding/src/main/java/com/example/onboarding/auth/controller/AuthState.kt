@@ -20,6 +20,7 @@ fun AuthStateUiState.isLoading(): Boolean {
 data class AuthState(
     val uiState: AuthStateUiState = AuthStateUiState.IDLE,
     val errorMessage: String? = null,
+    val showSelectRoleForm: Boolean = false,
 
     ///[Ui Data]
     val listOrg: List<OrgAccess> = emptyList(),

@@ -30,7 +30,9 @@ class DatabaseUserRepository(
      */
     fun insertUsers(users: Collection<User>) {
         if (users.isEmpty()) return
-        val updatedUsers = users.map { user ->
+        val updatedUsers = users.filter {
+            it.id != null
+        }.map { user ->
             userCache[user.id]?.let { cached -> user.combineWith(cached) ?: user } ?: user
         }
         val usersToInsert = updatedUsers.filter { user ->

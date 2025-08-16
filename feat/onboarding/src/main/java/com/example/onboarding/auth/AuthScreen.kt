@@ -89,7 +89,8 @@ fun AuthScreen(
             Toast.makeText(context, "Forgot Password Clicked", Toast.LENGTH_SHORT).show()
         },
         onSignUp = openSignUp,
-        isSignInLoading = state.value.uiState.isLoading()
+        isSignInLoading = state.value.uiState.isLoading(),
+        showSelectRoleForm = state.value.showSelectRoleForm
     )
 
 }
@@ -100,7 +101,8 @@ internal fun AuthScreen(
     onLogin: (String, String, String) -> Unit,
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
-    isSignInLoading: Boolean = false
+    isSignInLoading: Boolean = false,
+    showSelectRoleForm: Boolean = false
 ) {
     Scaffold { contentPadding ->
         // This is a placeholder for the AuthScreen implementation.
@@ -127,17 +129,38 @@ internal fun AuthScreen(
                             iconSize = 60.dp,
                         )
                         Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
-                        LoginForm(
-                            onLogin = onLogin,
-                            onForgotPassword = onForgotPassword,
-                            onSignUp = onSignUp,
-                            isSignInLoading = isSignInLoading,
-                        )
+                        if(showSelectRoleForm) {
+                            SelectRoleForm()
+                        } else {
+                            LoginForm(
+                                onLogin = onLogin,
+                                onForgotPassword = onForgotPassword,
+                                onSignUp = onSignUp,
+                                isSignInLoading = isSignInLoading,
+                            )
+                        }
+
                     }
                     Footer()
                 }
             }
         )
+    }
+}
+
+@Composable
+internal fun SelectRoleForm() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = LayoutConstants.PADDING_SMALL.dp),
+        shape = RoundedCornerShape(DisplayMetric.CARD_BORDER_RADIUS.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(20.dp)
+    ) {
+
     }
 }
 
