@@ -20,6 +20,7 @@ class AuthViewModel @Inject constructor(
 ) : ViewModelMachine<AuthState, AuthEvent>(
     initialState = AuthState()
 ) {
+
     override suspend fun handleEvent(event: AuthEvent) {
         when (event) {
             is AuthEvent.SignIn -> {

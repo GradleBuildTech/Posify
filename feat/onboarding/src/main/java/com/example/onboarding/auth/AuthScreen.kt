@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.components.common.BuildAppDropdownField
 import com.example.components.common.BuildButton
 import com.example.components.common.BuildGradientBackground
 import com.example.components.common.BuildHeroSection
@@ -46,6 +47,8 @@ import com.example.core.extensions.showToast
 import com.example.core.lib.constants.DesignSystem
 import com.example.core.lib.constants.DisplayMetric
 import com.example.core.lib.constants.LayoutConstants
+import com.example.core.models.meta.OrgAccess
+import com.example.core.models.meta.RoleAccess
 import com.example.onboarding.auth.controller.AuthEvent
 import com.example.onboarding.auth.controller.AuthStateUiState
 import com.example.onboarding.auth.controller.AuthViewModel
@@ -90,7 +93,11 @@ fun AuthScreen(
         },
         onSignUp = openSignUp,
         isSignInLoading = state.value.uiState.isLoading(),
-        showSelectRoleForm = state.value.showSelectRoleForm
+        showSelectRoleForm = state.value.showSelectRoleForm,
+        listOrgAccess = state.value.listOrg,
+        orgSelected = state.value.orgSelected,
+        listRoleAccess = state.value.listRole,
+        roleSelected = state.value.roleSelected,
     )
 
 }
@@ -102,7 +109,12 @@ internal fun AuthScreen(
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
     isSignInLoading: Boolean = false,
-    showSelectRoleForm: Boolean = false
+    showSelectRoleForm: Boolean = false,
+    ///[Choose role Form] - This is used to select the role, organization, and POS terminal
+    listOrgAccess: List<OrgAccess>,
+    orgSelected: OrgAccess? = null,
+    listRoleAccess: List<RoleAccess> = emptyList(),
+    roleSelected: RoleAccess? = null,
 ) {
     Scaffold { contentPadding ->
         // This is a placeholder for the AuthScreen implementation.
@@ -130,7 +142,12 @@ internal fun AuthScreen(
                         )
                         Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
                         if(showSelectRoleForm) {
-                            SelectRoleForm()
+                            SelectRoleForm(
+                                listOrgAccess = listOrgAccess,
+                                orgSelected = orgSelected,
+                                listRoleAccess = listRoleAccess,
+                                roleSelected = roleSelected,
+                            )
                         } else {
                             LoginForm(
                                 onLogin = onLogin,
@@ -149,9 +166,20 @@ internal fun AuthScreen(
 }
 
 @Composable
-internal fun SelectRoleForm() {
+internal fun SelectRoleForm(
+    modifier: Modifier = Modifier,
+    listOrgAccess: List<OrgAccess>,
+    orgSelected: OrgAccess? = null,
+    listRoleAccess: List<RoleAccess>,
+    roleSelected: RoleAccess? = null,
+) {
+    val dropdownModifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = LayoutConstants.PADDING_SMALL.dp)
+        .height(230.dp)
+
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = LayoutConstants.PADDING_SMALL.dp),
         shape = RoundedCornerShape(DisplayMetric.CARD_BORDER_RADIUS.dp),
@@ -160,7 +188,45 @@ internal fun SelectRoleForm() {
         ),
         elevation = CardDefaults.cardElevation(20.dp)
     ) {
-
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(LayoutConstants.PADDING_ALL.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "Select Your Role",
+                textAlign = TextAlign.Center,
+                style = DesignSystem.BIG_TITLE_STYLE.copy(
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+            Spacer(modifier = Modifier.height(LayoutConstants.TRIPLE_SPACING.dp))
+            // Here you would implement the UI for selecting a role, organization, and POS terminal.
+            // This is a placeholder for the SelectRoleForm implementation.
+            BuildAppDropdownField<OrgAccess>(
+                modifier = Modifier.fillMaxWidth(),
+                dropdownModifier = dropdownModifier,
+                hint = "Select Organization",
+                items = listOrgAccess,
+                onValueChange = { /* Handle organization selection */ },
+                prefixIcon = Icons.Default.Home,
+                itemLabel = { it.orgName ?: "" },
+                value = orgSelected,
+            )
+            Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
+            BuildAppDropdownField<RoleAccess>(
+                modifier = Modifier.fillMaxWidth(),
+                dropdownModifier = dropdownModifier,
+                hint = "Select Role",
+                items = listRoleAccess,
+                onValueChange = { /* Handle role selection */ },
+                prefixIcon = Icons.Default.Person,
+                itemLabel = { it.name ?: "" },
+                value = roleSelected,
+            )
+        }
     }
 }
 

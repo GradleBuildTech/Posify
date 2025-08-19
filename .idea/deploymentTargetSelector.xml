@@ -16,6 +16,9 @@
       <SelectionState runConfigName="AppLoadingPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="PreviewBuildAppDropdownField">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

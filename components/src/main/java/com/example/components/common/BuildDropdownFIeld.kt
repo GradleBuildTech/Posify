@@ -1,27 +1,14 @@
 package com.example.components.common
-
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,35 +17,52 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.core.lib.constants.DesignSystem
 
+/**
+ * BuildAppDropdownField is a composable function that creates a customizable dropdown field.
+ * It allows users to select an item from a list, with a hint and optional prefix icon.
+ * @param modifier Modifier to be applied to the dropdown field.
+ * @param value The currently selected value, or null if no value is selected.
+ * @param items The list of items to display in the dropdown.
+ * @param onValueChange Callback invoked when a new value is selected.
+ * @param hint Hint text displayed when no value is selected.
+ * @param prefixIcon Optional icon displayed before the hint text.
+ * @param borderColor Optional color for the border; if null, defaults to primary color.
+ * @param borderWidth Width of the border around the dropdown field.
+ * @param cornerRadius Corner radius for the dropdown field's border.
+ * @param textColor Color of the text when a value is selected.
+ * @param hintColor Color of the hint text when no value is selected.
+ */
 @Composable
 fun <T> BuildAppDropdownField(
     modifier: Modifier = Modifier,
+    dropdownModifier: Modifier = Modifier,
     value: T?,
     items: List<T>,
     onValueChange: (T) -> Unit,
     hint: String,
-    prefixIcon: ImageVector = Icons.Default.Home, // default icon
-    borderColor:  Color? = null,
+    textStyle: TextStyle? = null,
+    prefixIcon: ImageVector = Icons.Default.Home,
+    borderColor: Color? = null,
     borderWidth: Dp = 1.5.dp,
-    cornerRadius: Dp = 18.dp,
+    cornerRadius: Dp = 8.dp, // Match TextField radius
     textColor: Color = Color.Black,
     hintColor: Color = Color.Gray,
-    isExpanded: Boolean = true,
     itemLabel: (T) -> String = { it.toString() }
 ) {
-    var expanded = remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
+    val resolvedBorderColor = borderColor ?: MaterialTheme.colorScheme.primary
 
-    val borderColor = borderColor ?: MaterialTheme.colorScheme.primary
     Box(
         modifier = modifier
             .fillMaxWidth()
             .border(
                 width = borderWidth,
-                color = borderColor,
+                color = resolvedBorderColor,
                 shape = RoundedCornerShape(cornerRadius)
             )
-            .clickable { expanded.value = !expanded.value }
+            .clickable { expanded = !expanded }
             .padding(horizontal = 12.dp, vertical = 10.dp)
     ) {
         Row(
@@ -66,35 +70,35 @@ fun <T> BuildAppDropdownField(
             modifier = Modifier.fillMaxWidth()
         ) {
             Icon(
-                prefixIcon,
+                imageVector = prefixIcon,
                 contentDescription = null,
-                tint = borderColor,
+                tint = resolvedBorderColor,
                 modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = value?.let { itemLabel(it) } ?: hint,
-                style = TextStyle(),
+                text = value?.let(itemLabel) ?: hint,
+                style = (textStyle ?: DesignSystem.TITLE_SMALL_STYLE).copy(color = if (value == null) hintColor else textColor),
                 modifier = Modifier.weight(1f)
             )
             Icon(
-                imageVector = if (expanded.value) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                 contentDescription = null,
-                tint = borderColor
+                tint = resolvedBorderColor
             )
         }
 
         DropdownMenu(
-            expanded = expanded.value,
-            onDismissRequest = { expanded.value = false },
-            modifier = Modifier.fillMaxWidth()
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = dropdownModifier.fillMaxWidth()
         ) {
             items.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(itemLabel(item)) },
+                    text = { Text(itemLabel(item), style =  textStyle ?: DesignSystem.TITLE_SMALL_STYLE) },
                     onClick = {
                         onValueChange(item)
-                        expanded.value = false
+                        expanded = false
                     }
                 )
             }
@@ -106,12 +110,12 @@ fun <T> BuildAppDropdownField(
 @Composable
 fun PreviewBuildAppDropdownField() {
     val items = listOf("Item 1", "Item 2", "Item 3")
-    var selectedItem = remember { mutableStateOf<String?>(null) }
+    var selectedItem by remember { mutableStateOf<String?>(null) }
 
     BuildAppDropdownField(
-        value = selectedItem.value,
+        value = selectedItem,
         items = items,
-        onValueChange = { selectedItem.value = it },
+        onValueChange = { selectedItem = it },
         hint = "Select an item",
         prefixIcon = Icons.Default.Home,
         borderColor = Color.Blue,

@@ -25,6 +25,11 @@ class TokenInterceptor @Inject constructor(
     private val moshi: Moshi,
     private val refreshTokService: RefreshTokenService
 ) : Interceptor {
+
+    companion object {
+        val EXCEPT_URL = listOf<String>("getbyDomain", "authenticate")
+    }
+
     private val lock = Any() // Synchronization object for thread safety
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
@@ -34,11 +39,15 @@ class TokenInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
 
+        val originalUrl = originalRequest.url
+
         // Use synchronous token retrieval to avoid runBlocking
         val token = secureTokenLocalService.getAccessTokenSync()
             ?: return chain.proceed(originalRequest)
-
         // Add Authorization header
+        if (EXCEPT_URL.any { originalUrl.encodedPath.contains(it) }) {
+            return chain.proceed(originalRequest)
+        }
         val request = originalRequest.addBearerToken(token)
         val response = chain.proceed(request)
 
