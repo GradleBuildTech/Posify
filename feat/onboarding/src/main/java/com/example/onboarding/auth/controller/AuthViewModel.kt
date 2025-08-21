@@ -6,6 +6,7 @@ import com.example.core.models.meta.OrgAccess
 import com.example.core.models.meta.PosTerminalAccess
 import com.example.core.models.meta.RoleAccess
 import com.example.domain.usecase.auth.AuthSaveUser
+import com.example.domain.usecase.auth.GetPosTerminalAccess
 import com.example.domain.usecase.auth.SaveInformation
 import com.example.domain.usecase.auth.SignInUseCase
 import com.example.manager.auth.AuthManager
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val authSaveUser: AuthSaveUser,
-    private val saveInformation: SaveInformation
+    private val saveInformation: SaveInformation,
+    private val getPosTerminalAccess: GetPosTerminalAccess
 ) : ViewModelMachine<AuthState, AuthEvent>(
     initialState = AuthState()
 ) {
@@ -26,8 +28,19 @@ class AuthViewModel @Inject constructor(
             is AuthEvent.SignIn -> {
                 handleSignIn(event.username, event.password, event.domainUrl)
             }
-            AuthEvent.NavigateToMain -> {
-
+            AuthEvent.NavigateToMain -> {}
+            is AuthEvent.SelectOrg -> {
+                selectOrg(event.org)
+            }
+            is AuthEvent.SelectRole -> {
+               selectRole(event.role)
+            }
+            is AuthEvent.GetPosTerminalAccess -> {}
+            is AuthEvent.SelectPosTerminal -> {
+                selectPosTerminal(event.posTerminal)
+            }
+            is AuthEvent.SaveInformation -> {
+                saveInformation()
             }
         }
     }
@@ -81,6 +94,62 @@ class AuthViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun selectOrg(orgAccess: OrgAccess) {
+        setUiState {
+            copy(
+                orgSelected = orgAccess,
+                posTerminalSelected = null
+            )
+        }
+    }
+
+    private fun selectPosTerminal(posTerminalAccess: PosTerminalAccess) {
+        setUiState {
+            copy(
+                posTerminalSelected = posTerminalAccess,
+                uiState = AuthStateUiState.SUCCESS
+            )
+        }
+    }
+
+
+    suspend fun selectRole(roleAccess: RoleAccess) {
+        setUiState {
+            copy(
+                roleSelected = roleAccess,
+                posTerminalSelected = null,
+                uiState = AuthStateUiState.LOADING
+            )
+        }
+        val orgId = uiState.value.orgSelected?.orgId
+        val userId = uiState.value.userLogin?.id
+        if(orgId == null || userId == null) { return }
+        getPosTerminalAccess.invoke(
+            userId = userId,
+            orgId = orgId
+        ).collect { either ->
+            if(either.isLeft()) {
+                return@collect setUiState {
+                    copy(
+                        uiState = AuthStateUiState.ERROR,
+                        errorMessage = either.leftValue()?.errorMessage
+                    )
+                }
+            }
+
+            val posTerminalAccessList = either.rightValue() ?: emptyList()
+
+            setUiState {
+                copy(
+                    listPosTerminalAccess = posTerminalAccessList,
+                    posTerminalSelected = posTerminalAccessList.firstOrNull(),
+                    uiState = AuthStateUiState.SUCCESS
+                )
+            }
+        }
+
     }
 
     /**

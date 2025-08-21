@@ -57,4 +57,15 @@ internal class DomainModule {
             secureTokenLocalService = secureTokenLocalService
         )
     }
+
+    @Provides
+    fun provideGetPosTerminalAccessUseCase(
+        authRepositories: AuthRepositories,
+        @IODispatcher ioDispatcher: CoroutineDispatcher
+    ): com.example.domain.usecase.auth.GetPosTerminalAccess {
+        return com.example.domain.usecase.auth.GetPosTerminalAccess(
+            authRepositories = authRepositories,
+            ioDispatcher = ioDispatcher
+        )
+    }
 }

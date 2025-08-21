@@ -1,6 +1,7 @@
 package com.example.data.repositories.impl
 
 import com.example.core.models.User
+import com.example.core.models.meta.PosTerminalAccess
 import com.example.core.models.request.auth.AuthRequest
 import com.example.core.models.request.auth.SignInRequest
 import com.example.core.models.response.AuthResponse
@@ -22,5 +23,13 @@ class AuthRepositoriesImpl @Inject constructor(
     override suspend fun authenticate(authRequest: AuthRequest): Flow<AuthResponse> =
         runCatchingApiCall {
             authService.authenticate(authRequest)
+        }
+
+    override suspend fun getPosTerminalAccess(
+        userId: Int,
+        orgId: Int
+    ): Flow<ResponseData<List<PosTerminalAccess>>> =
+        runCatchingApiCall {
+            authService.getPosTerminalAccess(userId, orgId)
         }
 }

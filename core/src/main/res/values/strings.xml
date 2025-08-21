@@ -9,4 +9,9 @@
     <string name="orSignInWith">Or Sign In With</string>
     <string name="signUp">Sign Up</string>
     <string name="restaurantName">My Restaurant</string>
+    <string name="selectPosTerminal">Select POS Terminal</string>
+    <string name="selectRole">Select role</string>
+    <string name="selectOrganization">Select organization</string>
+    <string name="selectYourRole">Select your role</string>
+    <string name="continuee">Continue</string>
 </resources>

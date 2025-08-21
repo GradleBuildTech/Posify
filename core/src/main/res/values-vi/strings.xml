@@ -9,4 +9,9 @@
     <string name="orSignInWith">Hoặc Đăng Nhập Bằng</string>
     <string name="signUp">Đăng ký dùng thử</string>
     <string name="restaurantName">Nhà Hàng Của Tôi</string>
+    <string name="selectPosTerminal">Chọn Thiết Bị POS</string>
+    <string name="selectRole">Chọn Vai Trò</string>
+    <string name="selectOrganization">Chọn Tổ Chức</string>
+    <string name="selectYourRole">Chọn Vai Trò Của Bạn</string>
+    <string name="continuee">Tiếp Tục</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
@@ -48,6 +49,7 @@ import com.example.core.lib.constants.DesignSystem
 import com.example.core.lib.constants.DisplayMetric
 import com.example.core.lib.constants.LayoutConstants
 import com.example.core.models.meta.OrgAccess
+import com.example.core.models.meta.PosTerminalAccess
 import com.example.core.models.meta.RoleAccess
 import com.example.onboarding.auth.controller.AuthEvent
 import com.example.onboarding.auth.controller.AuthStateUiState
@@ -66,12 +68,8 @@ fun AuthScreen(
     LaunchedEffect(key1 = state.value) {
         when(state.value.uiState) {
             AuthStateUiState.IDLE -> {}
-            AuthStateUiState.LOADING -> {
-                // Handle loading state if necessary
-            }
-            AuthStateUiState.SUCCESS -> {
-                // Handle success state, e.g., navigate to the next screen
-            }
+            AuthStateUiState.LOADING -> {}
+            AuthStateUiState.SUCCESS -> {}
             AuthStateUiState.ERROR -> {
                 context.showToast(message = "An error occurred during authentication")
             }
@@ -95,10 +93,25 @@ fun AuthScreen(
         isSignInLoading = state.value.uiState.isLoading(),
         showSelectRoleForm = state.value.showSelectRoleForm,
         listOrgAccess = state.value.listOrg,
-        orgSelected = state.value.orgSelected,
         listRoleAccess = state.value.listRole,
+        listPosTerminalAccess = state.value.listPosTerminalAccess,
+        orgSelected = state.value.orgSelected,
+        posTerminalSelected = state.value.posTerminalSelected,
         roleSelected = state.value.roleSelected,
+        onSelectRole = { role ->
+            authController.onEvent(AuthEvent.SelectRole(role))
+        },
+        onSelectOrg = { org ->
+            authController.onEvent(AuthEvent.SelectOrg(org))
+        },
+        onSelectPosTerminal = { posTerminal ->
+            authController.onEvent(AuthEvent.SelectPosTerminal(posTerminal))
+        },
+        onSave = {
+            authController.onEvent(AuthEvent.SaveInformation)
+        }
     )
+
 
 }
 
@@ -112,9 +125,16 @@ internal fun AuthScreen(
     showSelectRoleForm: Boolean = false,
     ///[Choose role Form] - This is used to select the role, organization, and POS terminal
     listOrgAccess: List<OrgAccess>,
-    orgSelected: OrgAccess? = null,
     listRoleAccess: List<RoleAccess> = emptyList(),
+    listPosTerminalAccess: List<PosTerminalAccess> = emptyList(),
+    orgSelected: OrgAccess? = null,
     roleSelected: RoleAccess? = null,
+    posTerminalSelected: PosTerminalAccess? = null,
+    ///[Choose role Form] - This is used to select the role, organization, and POS terminal
+    onSelectRole: (RoleAccess) -> Unit,
+    onSelectOrg: (OrgAccess) -> Unit,
+    onSelectPosTerminal: (PosTerminalAccess) -> Unit,
+    onSave: () -> Unit
 ) {
     Scaffold { contentPadding ->
         // This is a placeholder for the AuthScreen implementation.
@@ -143,10 +163,16 @@ internal fun AuthScreen(
                         Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
                         if(showSelectRoleForm) {
                             SelectRoleForm(
+                                onSave = onSave,
                                 listOrgAccess = listOrgAccess,
                                 orgSelected = orgSelected,
                                 listRoleAccess = listRoleAccess,
                                 roleSelected = roleSelected,
+                                onSelectRole = onSelectRole,
+                                onSelectOrg = onSelectOrg,
+                                listPosTerminalAccess = listPosTerminalAccess,
+                                posTerminalSelected = posTerminalSelected,
+                                onSelectPosTerminal = onSelectPosTerminal,
                             )
                         } else {
                             LoginForm(
@@ -169,13 +195,20 @@ internal fun AuthScreen(
 internal fun SelectRoleForm(
     modifier: Modifier = Modifier,
     listOrgAccess: List<OrgAccess>,
-    orgSelected: OrgAccess? = null,
     listRoleAccess: List<RoleAccess>,
+    listPosTerminalAccess: List<PosTerminalAccess>,
+    orgSelected: OrgAccess? = null,
+    posTerminalSelected: PosTerminalAccess? = null,
     roleSelected: RoleAccess? = null,
+    onSelectRole: (RoleAccess) -> Unit = {},
+    onSelectOrg: (OrgAccess) -> Unit = {},
+    onSelectPosTerminal: (PosTerminalAccess) -> Unit = {},
+
+    onSave: () -> Unit = { /* No-op, can be used for further actions */ }
 ) {
     val dropdownModifier = Modifier
-        .fillMaxWidth()
         .padding(horizontal = LayoutConstants.PADDING_SMALL.dp)
+        .fillMaxWidth()
         .height(230.dp)
 
     Card(
@@ -195,7 +228,7 @@ internal fun SelectRoleForm(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "Select Your Role",
+                text = stringResource(R.string.selectYourRole),
                 textAlign = TextAlign.Center,
                 style = DesignSystem.BIG_TITLE_STYLE.copy(
                     color = MaterialTheme.colorScheme.primary,
@@ -203,14 +236,14 @@ internal fun SelectRoleForm(
                 )
             )
             Spacer(modifier = Modifier.height(LayoutConstants.TRIPLE_SPACING.dp))
-            // Here you would implement the UI for selecting a role, organization, and POS terminal.
-            // This is a placeholder for the SelectRoleForm implementation.
             BuildAppDropdownField<OrgAccess>(
                 modifier = Modifier.fillMaxWidth(),
                 dropdownModifier = dropdownModifier,
-                hint = "Select Organization",
+                hint = stringResource(R.string.selectOrganization),
                 items = listOrgAccess,
-                onValueChange = { /* Handle organization selection */ },
+                onValueChange = {
+                    onSelectOrg(it)
+                },
                 prefixIcon = Icons.Default.Home,
                 itemLabel = { it.orgName ?: "" },
                 value = orgSelected,
@@ -219,13 +252,46 @@ internal fun SelectRoleForm(
             BuildAppDropdownField<RoleAccess>(
                 modifier = Modifier.fillMaxWidth(),
                 dropdownModifier = dropdownModifier,
-                hint = "Select Role",
+                hint = stringResource(R.string.selectRole),
                 items = listRoleAccess,
-                onValueChange = { /* Handle role selection */ },
+                onValueChange = {
+                    onSelectRole(it)
+                },
                 prefixIcon = Icons.Default.Person,
                 itemLabel = { it.name ?: "" },
                 value = roleSelected,
             )
+            Spacer(modifier = Modifier.height(LayoutConstants.DOUBLE_SPACING.dp))
+            BuildAppDropdownField<PosTerminalAccess>(
+                modifier = Modifier.fillMaxWidth(),
+                dropdownModifier = dropdownModifier,
+                hint = stringResource(R.string.selectPosTerminal),
+                items = listPosTerminalAccess,
+                onValueChange = {
+                    onSelectPosTerminal(it)
+                },
+                prefixIcon = Icons.Default.ShoppingCart,
+                itemLabel = { it.name ?: "" },
+                value = posTerminalSelected, // No initial value for POS terminal
+            )
+            Spacer(modifier = Modifier.height(LayoutConstants.TRIPLE_SPACING.dp))
+
+            BuildButton(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.primary,
+                height = 50.dp,
+                onPress = onSave
+            ) {
+                Text(
+                    text = stringResource(R.string.continuee),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                    style = DesignSystem.TITLE_MEDIUM_STYLE.copy(
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
         }
     }
 }
