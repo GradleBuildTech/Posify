@@ -7,3 +7,7 @@ import com.example.navigation.utils.WithoutArgsScreen
 object Order: WithoutArgsScreen() {
     override val route = AppDecorator.ORDER
 }
+
+object OrderViewTable: WithoutArgsScreen() {
+    override val route = AppDecorator.ORDER_VIEW_TABLE
+}

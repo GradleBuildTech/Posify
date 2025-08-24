@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = Android.navigationNameSpace
+    namespace = Android.onboardingNameSpace
     compileSdk = Android.compileSdk
 
     defaultConfig {
@@ -30,36 +30,39 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
     buildFeatures {
         compose = true
     }
 
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 }
 
 dependencies {
     // 🎉Module
+    implementation(project(":components"))
     implementation(project(":core"))
     implementation(project(":manager"))
-    implementation(project(":feat:auth"))
-    implementation(project(":feat:onboarding"))
-    implementation(project(":feat:order"))
-
-    // 🚧Navigation
-    implementation(Dependencies.composeNavigation)
+    implementation(project(":client"))
+    implementation(project(":offline"))
+    implementation(project(":domain"))
 
     // 🧱 Core AndroidX & Lifecycle
     implementation(Dependencies.androidxCoreKtx)
     implementation(Dependencies.androidxAppCompat)
+    implementation(Dependencies.material)
 
-    // 🧪 Instrumented Testing (UI test, Espresso, etc.)
-    testImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.androidxJunit)
-    androidTestImplementation(Dependencies.espressoCore)
+    // 🏫 Compose
+    implementation(Dependencies.lifecycleRuntimeKtx)
+    implementation(Dependencies.activityCompose)
+    implementation(platform(Dependencies.composeBom))
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeMaterial3)
 
     // 🎉 Hilt
     ksp(Dependencies.hiltCompiler)
     implementation(Dependencies.hiltCore)
+    implementation(Dependencies.hiltNavigationCompose)
 }

@@ -12,4 +12,5 @@ object DetailGraph: NavigationGraph {
     val order = Order
     val productDetail = ProductDetail
     val splash = Splash
+    val orderViewTable = OrderViewTable
 }

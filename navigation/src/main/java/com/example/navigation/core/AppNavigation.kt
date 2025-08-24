@@ -16,6 +16,7 @@ import com.example.manager.auth.AuthManager
 import com.example.manager.auth.AuthState
 import com.example.navigation.graph.DetailGraph
 import com.example.onboarding.splash.SplashScreen
+import com.example.order.viewTable.OrderViewTableScreen
 
 // This file defines the main navigation host for the application.
 @Composable
@@ -38,11 +39,11 @@ fun AppNavigation(
             is AuthState.Authenticated -> {
                 // User is authenticated, proceed with navigation
                 if (navController.currentDestination?.route == AppDecorator.AUTH) {
-                    navController.navigate(AppDecorator.ORDER) {
+                    navController.navigate(AppDecorator.ORDER_VIEW_TABLE) {
                         popUpTo(AppDecorator.AUTH) { inclusive = true }
                     }
                 } else {
-                    navController.navigate(AppDecorator.ORDER) {
+                    navController.navigate(AppDecorator.ORDER_VIEW_TABLE) {
                         popUpTo(AppDecorator.SPLASH) { inclusive = true }
                     }
                 }
@@ -51,7 +52,7 @@ fun AppNavigation(
                 // User is unauthenticated, navigate to auth screen
                 if (navController.currentDestination?.route != AppDecorator.AUTH) {
                     navController.navigate(AppDecorator.AUTH) {
-                        popUpTo(AppDecorator.ORDER) { inclusive = true }
+                        popUpTo(AppDecorator.ORDER_VIEW_TABLE) { inclusive = true }
                     }
                 }
             }
@@ -88,6 +89,9 @@ fun AppNavigation(
                     navController.navigate(DetailGraph.order.route)
                 }
             )
+        }
+        composable(DetailGraph.orderViewTable.route) {
+            OrderViewTableScreen()
         }
         composable(DetailGraph.order.route) {
             TestOrderScreen()
