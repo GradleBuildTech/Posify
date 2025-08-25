@@ -1,6 +1,7 @@
 package com.example.core.models.enum
 
 enum class TableStatus(val value: String) {
+
     ALL(""),
     EMPLOY("TIU"),
     EMPTY("ETB");

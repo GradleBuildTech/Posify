@@ -17,9 +17,11 @@ class GetAllTableReservation @Inject constructor(
     private val tableRepositories: TableRepositories,
     private val orgDataBaseLocal: DatabaseOrgRepository
 ) {
-    operator fun invoke(): Flow<Either<ExceptionState, List<Table>>> = flow {
+    operator fun invoke(
+        getTableRequest: GetTableRequest
+    ): Flow<Either<ExceptionState, List<Table>>> = flow {
         val response = tableRepositories.findAllTableAndReservationByDate(
-            GetTableRequest(
+            getTableRequest.copy(
                 page = 0,
                 pageSize = 999,
                 reservationDate = DateUtils().getCurrentDate(),

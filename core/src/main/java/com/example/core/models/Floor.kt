@@ -12,3 +12,16 @@ data class Floor(
     val qtyTables: Int? = null,
     val displayIndex: Int? = null
 )
+
+//Default Floor.default
+val Floor.default: Floor
+    get() = Floor(
+        id = 0,
+        floorNo = "default",
+        name = "Tất cả",
+        description = "Mặc định",
+        orgId = -1,
+        isActive = "Y",
+        qtyTables = 0,
+        displayIndex = 0
+    )
