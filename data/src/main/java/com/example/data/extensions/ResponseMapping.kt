@@ -2,6 +2,7 @@ package com.example.data.extensions
 
 import com.example.client.providers.moshi.MoshiBuilderProvider
 import com.example.core.models.response.ErrorResponse
+import com.example.core.models.response.PaginationResponse
 import com.example.core.models.response.ResponseData
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.Either.Left
@@ -72,6 +73,19 @@ fun Throwable.mapError(): Throwable {
 fun <R> ResponseData<R>.mapAndConverterToStateData(): Either<ExceptionState, R> {
     return if( (this.status == 200 || this.status == 201) && this.data != null) {
         Right<R>(this.data!!)
+    } else {
+        Left(
+            ExceptionState(
+                errorCode = ErrorCode.INTERNAL_ERROR,
+                errorMessage = this.message ?: "Unknown error",
+            )
+        )
+    }
+}
+
+fun<R> PaginationResponse<R>.mapAndConverterToStateData(): Either<ExceptionState, List<R>> {
+    return if(this.status == 200 || this.status == 201) {
+        Right<List<R>>(this.data)
     } else {
         Left(
             ExceptionState(

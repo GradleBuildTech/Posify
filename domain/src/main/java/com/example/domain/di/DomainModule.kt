@@ -3,10 +3,15 @@ package com.example.domain.di
 import com.example.client.security.SecureTokenLocalService
 import com.example.core.di.IODispatcher
 import com.example.data.repositories.AuthRepositories
+import com.example.data.repositories.FloorRepositories
 import com.example.data.repositories.MetaRepositories
+import com.example.data.repositories.TableRepositories
 import com.example.domain.usecase.auth.AuthSaveUser
+import com.example.domain.usecase.auth.GetPosTerminalAccess
 import com.example.domain.usecase.auth.SaveInformation
 import com.example.domain.usecase.auth.SignInUseCase
+import com.example.domain.usecase.cashier.GetAllFloors
+import com.example.domain.usecase.cashier.GetAllTableReservation
 import com.example.offline.repository.domain.org.DatabaseOrgRepository
 import com.example.offline.repository.domain.user.DatabaseUserRepository
 import dagger.Module
@@ -62,10 +67,31 @@ internal class DomainModule {
     fun provideGetPosTerminalAccessUseCase(
         authRepositories: AuthRepositories,
         @IODispatcher ioDispatcher: CoroutineDispatcher
-    ): com.example.domain.usecase.auth.GetPosTerminalAccess {
-        return com.example.domain.usecase.auth.GetPosTerminalAccess(
+    ): GetPosTerminalAccess {
+        return GetPosTerminalAccess(
             authRepositories = authRepositories,
             ioDispatcher = ioDispatcher
         )
+    }
+
+    /**
+     * Cashier use cases can be provided here
+     */
+    @Provides
+    fun provideFindAllTableReservation(
+        tableRepositories: TableRepositories,
+        orgLocalDataBase: DatabaseOrgRepository,
+    ): GetAllTableReservation {
+        return GetAllTableReservation(
+            tableRepositories = tableRepositories,
+            orgDataBaseLocal = orgLocalDataBase
+        )
+    }
+
+    @Provides
+    fun providesGetAllFloors(
+        floorRepositories: FloorRepositories
+    ): GetAllFloors {
+        return GetAllFloors(floorRepositories)
     }
 }

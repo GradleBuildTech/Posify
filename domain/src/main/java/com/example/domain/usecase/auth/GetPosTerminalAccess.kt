@@ -27,7 +27,7 @@ class GetPosTerminalAccess @Inject constructor(
         userId: Int,
         orgId: Int
     ): Flow<Either<ExceptionState, List<PosTerminalAccess>>> = flow {
-       val response = authRepositories.getPosTerminalAccess(userId, orgId)
+        val response = authRepositories.getPosTerminalAccess(userId, orgId)
            .first()
            .mapAndConverterToStateData()
          if (response.isLeft()) {

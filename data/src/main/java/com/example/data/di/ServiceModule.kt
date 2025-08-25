@@ -2,6 +2,7 @@ package com.example.data.di
 
 import com.example.data.providers.ApiServiceProvider
 import com.example.data.services.AuthService
+import com.example.data.services.MetaService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,8 +23,16 @@ class ServiceModule {
         ApiServiceProvider.getAuthService(retrofit)
 
     @Provides
-    fun provideMetaService(retrofit: Retrofit): com.example.data.services.MetaService =
+    fun provideMetaService(retrofit: Retrofit): MetaService =
         ApiServiceProvider.getMetaService(retrofit)
+
+    @Provides
+    fun provideFloorService(retrofit: Retrofit) =
+        ApiServiceProvider.getFloorService(retrofit)
+
+    @Provides
+    fun provideTableService(retrofit: Retrofit) =
+        ApiServiceProvider.getTableService(retrofit)
 }
 
 

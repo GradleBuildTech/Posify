@@ -5,7 +5,8 @@ import com.squareup.moshi.JsonClass
 
 
 @JsonClass(generateAdapter = true)
-data class ResponseData<T>(
+data class
+ResponseData<T>(
     val status: Int? = null,
     val message: String? = null,
     @Json(name = "data")
